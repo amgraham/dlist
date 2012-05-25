@@ -27,7 +27,12 @@ The four icons are from http://somerandomdude.com/work/iconic/ and included in t
 
 The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and included in this release for your convenience.
 
+Problems
+----
+
+Have an [issue](https://github.com/amgraham/dlist/issues)?
+
 Future
 ----
 
-I'd like to see sorting be available, I'll add when I get around to it.
+I'd like to see sorting by the various file attributres be available soon, I'll add when I get around to it.
