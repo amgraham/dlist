@@ -13,6 +13,9 @@ Installation
 
 Place dir-listing.php anywhere accessible on your web-host of choice. It is recommended to place it somewhere generic, and then link it into other directories.
 
+    cd /var/www/bin/
+    ln -s ../assets/dir-listing.php ./index.php
+
 Enhancement
 ----
 
