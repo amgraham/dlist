@@ -26,3 +26,8 @@ It will look prettier if you also utilize four icons and a web-font, they are "t
 The four icons are from http://somerandomdude.com/work/iconic/ and included in this release for your convenience.
 
 The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and included in this release for your convenience.
+
+Future
+----
+
+I'd like to see sorting be available, I'll add when I get around to it.
