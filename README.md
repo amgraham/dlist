@@ -1,9 +1,9 @@
 dlist - simple directory listing
 ====
 
-An empty folder presented by Apache (or others) is very ugly. Not anymore.
+An empty folder presented by Apache (and others) is very ugly. Now it can be less-ugly.
 
-Live Demo
+Demo
 ----
 
 http://smarterfish.com/assets/
@@ -16,6 +16,8 @@ Place dir-listing.php anywhere accessible on your web-host of choice. It is reco
     cd /var/www/bin/
     ln -s ../assets/dir-listing.php ./index.php
 
+I'm very aware that for multiple directories this is a chore, I'm open to suggestions on how to alleviate the initial investment.
+
 Enhancement
 ----
 
@@ -24,5 +26,3 @@ It will look prettier if you also utilize four icons and a web-font, they are "t
 The four icons are from http://somerandomdude.com/work/iconic/ and included in this release for your convenience.
 
 The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and included in this release for your convenience.
-
-
