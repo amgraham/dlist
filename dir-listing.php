@@ -12,9 +12,12 @@ $imgdir = "http://smarterfish.com/assets/img/iconic/raster/black/";
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
-// place them in the following directory
+// make it a web-font and place it in the following directory (or use the included version)
 // your font directory
 $fontdir = "http://smarterfish.com/assets/fonts/";
+
+// set this to true if you have setup the four icons and web-font
+$pretty = false;
 
 function format_bytes($size) {
 	// via: http://www.php.net/manual/en/function.filesize.php#100097
@@ -75,7 +78,11 @@ asort($files); asort($directories);
 		@font-face { font-family: 'UniversalisADFStdRegular'; src: url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.eot') format('eot'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.woff') format('woff'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.ttf') format('truetype'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
 		html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}
 			html { }
+			<?php if ($pretty) { ?>
+			body { font-size: 1em; color: #333; line-height: 1.2em;font-family: sans-serif; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
+			<?php } else { ?>
 			body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
+			<?php } ?>
 			p { line-height:1.3em; }
 			p,hr,h1,table{margin-bottom:1em;}
 			a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
@@ -113,7 +120,11 @@ asort($files); asort($directories);
 				<?php 
 				foreach ($directories as $file) {
 					echo "<tr class=\"folder\">";
-					echo "<td class=\"filename\"><img src=\"".$file["icon"]."\"/> <a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
+					echo "<td class=\"filename\">";
+					if ($pretty) {
+						echo "<img src=\"".$file["icon"]."\"/> ";
+					}
+					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
 					echo "<td>".$file["last-modified"]."</td>";
 					echo "<td>&mdash;</td>";
 					echo "<td>".$file["file-type"]."</td>";
@@ -121,7 +132,11 @@ asort($files); asort($directories);
 				}
 				foreach ($files as $file) {
 					echo "<tr>";
-					echo "<td><img src=\"".$file["icon"]."\"/> <a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
+					echo "<td class=\"filename\">";
+					if ($pretty) {
+						echo "<img src=\"".$file["icon"]."\"/> ";
+					}
+					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
 					echo "<td>".$file["last-modified"]."</td>";
 					echo "<td>".$file["file-size"]."</td>";
 					echo "<td>".$file["file-type"]."</td>";
