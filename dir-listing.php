@@ -4,16 +4,17 @@
 	// ln -s ../assets/php/dir-listing.php ./index.php
 // enjoy!
 
-// works better with iconic pack!
+// looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
-	// only four images are required:
-	// 1. https://github.com/somerandomdude/Iconic/blob/master/raster/iconic_r0g0b0/cog_16x16.png
-	// 2. https://github.com/somerandomdude/Iconic/blob/master/raster/iconic_r0g0b0/document_stroke_16x16.png
-	// 3. https://github.com/somerandomdude/Iconic/blob/master/raster/iconic_r0g0b0/folder_stroke_16x16.png
-	// 4. https://github.com/somerandomdude/Iconic/blob/master/raster/iconic_r0g0b0/image_16x16.png
-
+// place them in the following directory
 // your image directory
 $imgdir = "http://smarterfish.com/assets/img/iconic/raster/black/";
+
+// looks better with Universalis!
+// http://arkandis.tuxfamily.org/adffonts.html
+// place them in the following directory
+// your font directory
+$fontdir = "http://smarterfish.com/assets/fonts/";
 
 function format_bytes($size) {
 	// via: http://www.php.net/manual/en/function.filesize.php#100097
@@ -34,7 +35,6 @@ foreach ($splitRequest as $splitItem) {
 	$links .= $splitItem."/";
 	$urlLinks.= "<a href=\"".$links."\">".$splitItem."</a><span class=\"spc\"/>/</span>";
 }
-
 
 // go over the files
 $files = array();
@@ -72,7 +72,7 @@ asort($files); asort($directories);
 <head> 
 	<meta charset="UTF-8" /> 
 	<style type="text/css">
-		@font-face { font-family: 'UniversalisADFStdRegular'; src: url('http://smarterfish.com/assets/fonts/universalisadfstd-regular-webfont.eot') format('eot'), url('http://smarterfish.com/assets/fonts/universalisadfstd-regular-webfont.woff') format('woff'), url('http://smarterfish.com/assets/fonts/universalisadfstd-regular-webfont.ttf') format('truetype'), url('http://smarterfish.com/assets/fonts/universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
+		@font-face { font-family: 'UniversalisADFStdRegular'; src: url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.eot') format('eot'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.woff') format('woff'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.ttf') format('truetype'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
 		html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}
 			html { }
 			body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
