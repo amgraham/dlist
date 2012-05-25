@@ -3,6 +3,11 @@ dlist - simple directory listing
 
 An empty folder presented by Apache (or others) is very ugly. Not anymore.
 
+Example
+----
+
+http://smarterfish.com/assets/
+
 Installation
 ----
 
