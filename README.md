@@ -5,6 +5,11 @@ An empty folder presented by [Apache](http://apache.org) (and others) is very ug
 
 There is a [demo available](http://smarterfish.com/assets/) for those people that need proof.
 
+Features
+----
+
+dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.
+
 Installation
 ----
 
@@ -34,7 +39,7 @@ The four icons are from http://somerandomdude.com/work/iconic/, while the font i
 
 If you decide to beautify your version upload the four icons and web font somewhere easy (read; universally accessible), open `dir-listing.php` in your favorite editor, and change `$pretty` to `true` then update `$imgdir` &amp; `$fontdir` accordingly (wherever you decided to keep the icons and webfont).
 
-A simple refresh in your browser should display the changes.
+A refresh of your browser should display the changes.
 
 ### Hidden Files
 
@@ -45,13 +50,12 @@ You can override the default and change `$showhidden` to `true` and have dlist m
 Helper Files
 ----
 
-Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` from the same directory being displyed and insert it at the top of the current directory listing. There is a [demo displaying the in action](http://craft.smarterfish.com/map/).
+Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` from the same directory being displyed and insert it at the top of the current directory listing. There is a [demo displaying this in action](http://craft.smarterfish.com/map/).
 
-There is no processing for security, the text contained within `.dir-list-details` is passed through to the browser.
+There is no processing for security, the text contained within `.dir-list-details` is passed directly to the browser.
 
 Future
 ----
 
-1. Sorting by the various attributes we watch.
-2. Count of items in a folder (not sure about this one; feedback welcome)
-3. Add another "helper file" to force a specific folder/file to be hidden regardless of the specific setting
+1. Count of items in a folder (not sure about this one; feedback welcome)
+2. Add another "helper file" to force a specific folder/file to be hidden regardless of the specific setting
