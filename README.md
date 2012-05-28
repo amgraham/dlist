@@ -1,7 +1,7 @@
 dlist - simple directory listing
 ====
 
-An empty folder presented by Apache (and others) is very ugly. Now it can be less-ugly. You can view the [demo online](http://smarterfish.com/assets/).
+An empty folder presented by Apache (and others) is very ugly. Now it can be less ugly. You can view a [demo online](http://smarterfish.com/assets/).
 
 Installation
 ----
@@ -26,7 +26,7 @@ I'm very aware that for multiple directories this is a chore, I'm open to sugges
 Enhancement
 ----
 
-It will look prettier if you also utilize four icons and a web-font, they are "turned off" by default so you can get up and running immediately, you should enable them though.
+It will look prettier if you also utilize four icons and a web-font, they are "turned off" by default so you can get up and running immediately.
 
 The four icons are from http://somerandomdude.com/work/iconic/ and included in this release for your convenience.
 
