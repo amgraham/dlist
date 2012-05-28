@@ -1,12 +1,14 @@
 dlist - simple directory listing
 ====
 
-An empty folder presented by Apache (and others) is very ugly. Now it can be less ugly. You can view a [demo online](http://smarterfish.com/assets/).
+An empty folder presented by [Apache](http://apache.org) (and others) is very ugly. [dlist](https://github.com/amgraham/dlist) strives to replace the default in a less-ugly, and slightly-more-useful manner. 
+
+There is a [demo available](http://smarterfish.com/assets/) for those people that need proof.
 
 Installation
 ----
 
-You only *really* need `dir-listing.php`, you should place it somewhere accessible on your web-host of choice.
+You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php) and place it somewhere accessible on your web-host of choice.
 
 There are various settings contained within the file that are set to their safest/blandest options. You can [adjust them accordingly](#enhancement). 
 
@@ -21,7 +23,7 @@ If you wanted to have a `.dir-list-details` file as well, it must be placed in t
     cat > .dir-list-details
     <p>Hello there!</p>
 
-I'm very aware that for multiple directories this is a chore, I'm open to suggestions on how to alleviate the initial investment.
+I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues) on how to alleviate the initial investment.
 
 Enhancement
 ----
