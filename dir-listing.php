@@ -17,7 +17,7 @@ $imgdir = "http://smarterfish.com/assets/img/iconic/raster/black/";
 $fontdir = "http://smarterfish.com/assets/fonts/";
 
 // set this to true if you have setup the four icons and web-font
-$pretty = true;
+$pretty = false;
 
 // would you like to show hidden files? (recommendation: false)
 $showhidden = false;
