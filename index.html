@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Dlist : A simple way to list files in a web-directory" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Dlist</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/amgraham/dlist">View on GitHub</a>
+
+          <h1 id="project_title">Dlist</h1>
+          <h2 id="project_tagline">A simple way to list files in a web-directory</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/amgraham/dlist/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/amgraham/dlist/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>dlist - simple directory listing</h1>
+
+<p>An empty folder presented by <a href="http://apache.org">Apache</a> (and others) is very ugly. <a href="https://github.com/amgraham/dlist">dlist</a> strives to replace the default in a less-ugly, and slightly-more-useful manner. </p>
+
+<h2>Features</h2>
+
+<p>dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.</p>
+
+<p>There is a <a href="http://smarterfish.com/assets/">demo available</a> that showcases the various features and design of dlist. Another <a href="http://craft.smarterfish.com/map/">demo is available</a> that showcases the <a href="#helper-files">details helper file</a> feature.</p>
+
+<h2>Installation</h2>
+
+<p>You only <em>really</em> need <code>dir-listing.php</code>, <a href="https://raw.github.com/amgraham/dlist/master/dir-listing.php">grab the file</a>, make any <a href="#enhancement">adjustments</a> you might need to make, and place it somewhere accessible on your web-host of choice.</p>
+
+<p>It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated <a href="#helper-files">helper files</a> will need to go within the various directories that require them.</p>
+
+<pre><code>cd /var/www/bin/
+ln -s ../assets/dir-listing.php ./index.php
+</code></pre>
+
+<p>If you wanted to have a <code>.dir-list-details</code> file as well, it must be placed in the same directory.</p>
+
+<pre><code>cd /var/www/bin/
+cat &gt; .dir-list-details
+&lt;p&gt;Hello there!&lt;/p&gt;
+</code></pre>
+
+<p>I'm very aware that for multiple directories this is a chore, I'm <a href="https://github.com/amgraham/dlist/issues">open to suggestions</a> on how to alleviate the initial investment.</p>
+
+<h2>Enhancement</h2>
+
+<h3>General Prettiness</h3>
+
+<p>It will look prettier if you also utilize four icons and a web-font, they are "turned off" by default so you can get up and running immediately.</p>
+
+<p>The four icons are from <a href="http://somerandomdude.com/work/iconic/">http://somerandomdude.com/work/iconic/</a>, while the font is Universalis from <a href="http://arkandis.tuxfamily.org/adffonts.html">http://arkandis.tuxfamily.org/adffonts.html</a> both are included in this release for your convenience.</p>
+
+<p>If you decide to beautify your version upload the four icons and web font somewhere easy (read; universally accessible), open <code>dir-listing.php</code> in your favorite editor, and change <code>$pretty</code> to <code>true</code> then update <code>$imgdir</code> &amp; <code>$fontdir</code> accordingly (wherever you decided to keep the icons and webfont).</p>
+
+<p>A refresh of your browser should display the changes.</p>
+
+<h3>Hidden Files</h3>
+
+<p>By default, dlist will not display hidden files (some call them "dot-files") within the current directory; this is intentional and recommended.</p>
+
+<p>You can override the default and change <code>$showhidden</code> to <code>true</code> and have dlist make your hidden files available for all the world to see. <strong>This is not recommended.</strong> If you follow the recomendation or not, dlist will not show it's <a href="#helper-files">helper files</a>.</p>
+
+<h2>Helper Files</h2>
+
+<p>Currently there is one helper file in use: <code>.dir-list-details</code>. It will take whatever is contained in the file <code>.dir-list-details</code> from the same directory being displyed and insert it at the top of the current directory listing. There is a <a href="http://craft.smarterfish.com/map/">demo displaying this in action</a>.</p>
+
+<p>There is no processing for security, the text contained within <code>.dir-list-details</code> is passed directly to the browser.</p>
+
+<h2>Future</h2>
+
+<ol>
+<li>Count of items in a folder (not sure about this one; feedback welcome)</li>
+<li>Add another "helper file" to force a specific folder/file to be hidden regardless of the specific setting</li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Dlist maintained by <a href="https://github.com/amgraham">amgraham</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
