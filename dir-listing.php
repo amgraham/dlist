@@ -125,7 +125,7 @@ asort($files); asort($directories);
 			<table class="dir-list">
 				<tr>
 					<th>filename</th>
-					<th>last modified (<?php echo date("T"); ?>)</th>
+					<th>last modified</th>
 					<th><span class="help" title="approximate">size</span></th>
 					<th>filetype</th>
 				</tr>
