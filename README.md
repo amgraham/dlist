@@ -35,4 +35,4 @@ Have an [issue](https://github.com/amgraham/dlist/issues)?
 Future
 ----
 
-I'd like to see sorting by the various file attributres be available soon, I'll add when I get around to it.
+I'd like to see sorting by the various file attributes be available soon, I'll add when I get around to it.
