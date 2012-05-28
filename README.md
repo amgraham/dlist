@@ -8,7 +8,7 @@ Installation
 
 You only *really* need `dir-listing.php`, you should place it somewhere accessible on your web-host of choice.
 
-There are various settings contained within the file (dir-listing.php) that are set to their safest options. You can adjust them accordingly. 
+There are various settings contained within the file that are set to their safest/blandest options. You can [adjust them accordingly](#enhancement). 
 
 It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated "helper files" will need to go into the linked directories.
 
