@@ -40,7 +40,7 @@ A simple refresh in your browser should display the changes.
 
 By default, dlist will not display hidden files (some call them "dot-files") within the current directory; this is intentional and recommended.
 
-If you decide to display hidden files, dlist will still hide it's various [helper files](#helper-files).
+You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recomendation or not, dlist will not show it's [helper files](#helper-files).
 
 Helper Files
 ----
