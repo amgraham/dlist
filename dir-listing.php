@@ -39,6 +39,7 @@ foreach ($splitRequest as $splitItem) {
 	$urlLinks.= "<a href=\"".$links."\">".$splitItem."</a><span class=\"spc\"/>/</span>";
 }
 // look for a details file
+// keep in mind the .dir-list-details file needs to be in the directory currently being displayed, not the installation directory.
 $details = false;
 if (file_exists(".dir-list-details")) {
 	$details = file_get_contents(".dir-list-details");
