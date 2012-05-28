@@ -8,7 +8,7 @@ There is a [demo available](http://smarterfish.com/assets/) for those people tha
 Installation
 ----
 
-You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments]((#enhancement)) you might need to make, and place it somewhere accessible on your web-host of choice.
+You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments](#enhancement) you might need to make, and place it somewhere accessible on your web-host of choice.
 
 It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated [helper files](#helper-files) will need to go within the various directories that require them.
 
