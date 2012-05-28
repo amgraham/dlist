@@ -43,6 +43,6 @@ If you decide to display hidden files, dlist will still hide it's various [helpe
 Helper Files
 ----
 
-Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` from the same direcotry being diaplyed and insert it at the top of the directory listing.
+Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` from the same directory being displyed and insert it at the top of the current directory listing.
 
 There is no processing for security, the text contained within `.dir-list-details` is passed through to the browser.
