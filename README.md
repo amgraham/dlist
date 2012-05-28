@@ -10,7 +10,7 @@ Installation
 
 You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments]((#enhancement)) you might need to make, and place it somewhere accessible on your web-host of choice.
 
-It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated "helper files" will need to go within the various directories that require them.
+It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated [helper files](#helper-files) will need to go within the various directories that require them.
 
     cd /var/www/bin/
     ln -s ../assets/dir-listing.php ./index.php
@@ -38,6 +38,11 @@ The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and inc
 
 By default, dlist will not display hidden files (some call them "dot-files") within the current directory; this is intentional and recommended.
 
-If you decide to display hidden files, dlist will still hide it's various "helper files."
+If you decide to display hidden files, dlist will still hide it's various [helper files](#helper-files).
 
-### 
+Helper Files
+----
+
+Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` and display it at the top on the directory listing.
+
+There is no processing for security, the text contained within `.dir-list-details` is passed through to the browser.
