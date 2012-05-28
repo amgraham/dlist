@@ -90,13 +90,14 @@ asort($files); asort($directories);
 			body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
 			<?php } ?>
 			p { line-height:1.3em; }
-			p,hr,h1,table{margin-bottom:1em;}
+			p,hr,h1,table{margin-bottom:.1em;}
 			a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
 			a:hover, a:visited:hover, *[onclick]:hover  { border-bottom: 1px solid #83b0fe; color: #2e52a4;}
 			header { margin-bottom: 1em; } 
 				header h1 {font-size:1.7em; margin: 0; padding: 0; display: inline-block;}
 			section { padding: 0; margin: 0; }
 			article { margin-top: .5em; }
+				article#details { margin-bottom: 1em; }
 			.help { cursor: help; border-bottom: 1px dashed #ddd; }
 			ol.inline li { display: inline !important; }
 			table.dir-list { width: 100%; }
@@ -116,7 +117,7 @@ asort($files); asort($directories);
 	
 	<section>
 		<?php if ($details) { ?>
-		<article>
+		<article id="details">
 			<?php echo $details; ?>
 		</article>
 		<?php } ?>
