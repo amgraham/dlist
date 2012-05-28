@@ -3,12 +3,12 @@ dlist - simple directory listing
 
 An empty folder presented by [Apache](http://apache.org) (and others) is very ugly. [dlist](https://github.com/amgraham/dlist) strives to replace the default in a less-ugly, and slightly-more-useful manner. 
 
-There is a [demo available](http://smarterfish.com/assets/) for those people that need proof.
-
 Features
 ----
 
 dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.
+
+There is a [demo available](http://smarterfish.com/assets/) that showcases the various features and design of dlist. Another [demo is available](http://craft.smarterfish.com/map/) that showcases the [details helper file](#helper-files) feature.
 
 Installation
 ----
