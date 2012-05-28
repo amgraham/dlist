@@ -101,7 +101,7 @@ while (false !== ($file = readdir($dh))) {
 				$name = $file;
 			}
 
-			$directories[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-type" => finfo_file($finfo, $file), "icon" => $imgdir."folder_stroke_16x16.png");
+			$directories[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "last-modified-raw" => date("c", filemtime($file)), "file-type" => finfo_file($finfo, $file), "file-size-raw" => filesize($file), "icon" => $imgdir."folder_stroke_16x16.png");
 		} else {
 			if (strstr($filetype, "image")) {
 				$icon = $imgdir."image_16x16.png";
@@ -111,7 +111,7 @@ while (false !== ($file = readdir($dh))) {
 				$icon = $imgdir."cog_16x16.png";
 			}
 
-			$files[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-size" => format_bytes(filesize($file)), "file-type" => finfo_file($finfo, $file), "icon" => $icon);
+			$files[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)),"last-modified-raw" => date("c", filemtime($file)), "file-size" => format_bytes(filesize($file)), "file-size-raw" => filesize($file), "file-type" => finfo_file($finfo, $file), "icon" => $icon);
 		}
 	}
 }
@@ -119,10 +119,10 @@ finfo_close($finfo);
 closedir($dh);
 
 function sort_date ($a, $b) {
-	return strnatcmp($a["last-modified"], $b["last-modified"]);
+	return strnatcmp($a["last-modified-raw"], $b["last-modified-raw"]);
 }
 function sort_size ($a, $b) {
-	return strnatcmp($a["file-size"], $b["file-size"]);
+	return strnatcmp($a["file-size-raw"], $b["file-size-raw"]);
 }
 function sort_type ($a, $b) {
 	return strnatcmp($a["file-type"], $b["file-type"]);
