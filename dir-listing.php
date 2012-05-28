@@ -38,6 +38,11 @@ foreach ($splitRequest as $splitItem) {
 	$links .= $splitItem."/";
 	$urlLinks.= "<a href=\"".$links."\">".$splitItem."</a><span class=\"spc\"/>/</span>";
 }
+// look for a details file
+$details = false;
+if (file_exists(".dir-list-details")) {
+	$details = file_get_contents(".dir-list-details");
+}
 
 // go over the files
 $files = array();
@@ -47,7 +52,8 @@ $dh = opendir($dirpath);
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
 while (false !== ($file = readdir($dh))) {
-	if (($file != "..") && ($file != ".") && ($file != "index.php")) {	
+	// make sure the filename isn't a dot-file, this file, or the details file.
+	if (($file != "..") && ($file != ".") && ($file != "index.php") && ($file != ".dir-list-details")) {	
 		$filetype = finfo_file($finfo, $file);
 		if ($filetype == "directory") {
 			$directories[$file] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-type" => finfo_file($finfo, $file), "icon" => $imgdir."folder_stroke_16x16.png");
@@ -109,6 +115,11 @@ asort($files); asort($directories);
 	</header>
 	
 	<section>
+		<?php if ($details) { ?>
+		<article>
+			<?php echo $details; ?>
+		</article>
+		<?php } ?>
 		<article>
 			<table class="dir-list">
 				<tr>
