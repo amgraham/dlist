@@ -19,6 +19,9 @@ $fontdir = "http://smarterfish.com/assets/fonts/";
 // set this to true if you have setup the four icons and web-font
 $pretty = false;
 
+// would you like to show hidden files? (recommendation: false)
+$showhidden = false;
+
 function format_bytes($size) {
 	// via: http://www.php.net/manual/en/function.filesize.php#100097
     $units = array(' B', ' KB', ' MB', ' GB', ' TB');
@@ -52,9 +55,18 @@ $dirpath = ".";
 $dh = opendir($dirpath);
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
+
+$ignore = array('.', '..', 'index.php');
+
+
 while (false !== ($file = readdir($dh))) {
+	if ($showhidden) {
+		$hiddenFile = true;
+	} else {
+		$hiddenFile = substr($file, 0, 1) != ".";
+	}
 	// make sure the filename isn't a dot-file, this file, or the details file.
-	if (($file != "..") && ($file != ".") && ($file != "index.php") && ($file != ".dir-list-details")) {	
+	if (!in_array($file, $ignore) and $hiddenFile) {	
 		$filetype = finfo_file($finfo, $file);
 		if ($filetype == "directory") {
 			$directories[$file] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-type" => finfo_file($finfo, $file), "icon" => $imgdir."folder_stroke_16x16.png");
