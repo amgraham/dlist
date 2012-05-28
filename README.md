@@ -23,13 +23,3 @@ It will look prettier if you also utilize four icons and a web-font, they are "t
 The four icons are from http://somerandomdude.com/work/iconic/ and included in this release for your convenience.
 
 The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and included in this release for your convenience.
-
-Problems
-----
-
-Have an [issue](https://github.com/amgraham/dlist/issues)?
-
-Future
-----
-
-I'd like to see sorting by the various file attributes be available soon, I'll add when I get around to it.
