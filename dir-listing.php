@@ -118,6 +118,7 @@ asort($files); asort($directories);
 				table.dir-list tr.folder td.filename { font-weight: bold; }
 				table.dir-list a { border: 0px; }
 				table.dir-list img { vertical-align:-1px; }
+				tr.folder + tr.file td { padding-top: 1em; }
 			.spc { margin: 0 .2em 0 .2em; }
 	</style>
 	<title>Directory listing: <?php echo $request; ?></title> 
@@ -157,7 +158,7 @@ asort($files); asort($directories);
 					}
 				}
 				foreach ($files as $file) {
-					echo "<tr>";
+					echo "<tr class=\"file\">";
 					echo "<td class=\"filename\">";
 					if ($pretty) {
 						echo "<img src=\"".$file["icon"]."\"/> ";
