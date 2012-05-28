@@ -17,7 +17,7 @@ $imgdir = "http://smarterfish.com/assets/img/iconic/raster/black/";
 $fontdir = "http://smarterfish.com/assets/fonts/";
 
 // set this to true if you have setup the four icons and web-font
-$pretty = false;
+$pretty = true;
 
 // would you like to show hidden files? (recommendation: false)
 $showhidden = false;
@@ -87,21 +87,7 @@ while (false !== ($file = readdir($dh))) {
 	if (!in_array($file, $ignore) and $hiddenFile) {	
 		$filetype = finfo_file($finfo, $file);
 		if ($filetype == "directory") {
-			if ($sort){
-				if ($sort == "modified") {
-					$name = date("c", filemtime($file)).$file;
-				} else if ($sort == "size") {
-					$name = filesize($file).$file;
-				} else if ($sort == "type") {
-					$name = finfo_file($finfo, $file).$file;
-				} else if ($sort == "name") {
-					$name = $file;
-				} 
-			} else {
-				$name = $file;
-			}
-
-			$directories[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "last-modified-raw" => date("c", filemtime($file)), "file-type" => finfo_file($finfo, $file), "file-size-raw" => filesize($file), "icon" => $imgdir."folder_stroke_16x16.png");
+			$directories[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "last-modified-raw" => date("c", filemtime($file)), "file-type" => finfo_file($finfo, $file), "file-size-raw" => 0, "icon" => $imgdir."folder_stroke_16x16.png");
 		} else {
 			if (strstr($filetype, "image")) {
 				$icon = $imgdir."image_16x16.png";
@@ -137,27 +123,33 @@ $reverse_link_size = "";
 
 if ($sort == "modified") {
 	usort($files, 'sort_date'); 
+	usort($directories, 'sort_date'); 
 	$reverse_link_modified = "!";
 } else if ($sort == "size") {
 	usort($files, 'sort_size'); 
+	usort($directories, 'sort_size'); 
 	$reverse_link_size = "!";
 } else if ($sort == "type") {
 	usort($files, 'sort_type'); 
+	usort($directories, 'sort_type'); 
 	$reverse_link_type = "!";
 } else {
 	usort($files, 'sort_name');
+	usort($directories, 'sort_name'); 
 	$reverse_link_name = "!";
 }
 
 if ($reverse) {
 	$files = array_reverse($files);
+	// type and size doesn't change for directories (size, for now)
+	if (($sort != "size") and ($sort != "type")) {
+		$directories = array_reverse($directories);
+	}
 	$reverse_link_modified = "";
 	$reverse_link_name = "";
 	$reverse_link_type = "";
 	$reverse_link_size = "";
 }
-
-asort($directories);
 
 ?>
 <!DOCTYPE html> 
