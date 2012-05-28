@@ -48,6 +48,24 @@ if (file_exists(".dir-list-details")) {
 	$details = file_get_contents(".dir-list-details");
 }
 
+// figure out the sorting
+$sort = $_SERVER["QUERY_STRING"];
+
+if (substr($sort, 0, 1) == "!") {
+	$reverse = true;
+	$sort = str_replace("!", "", $sort);
+} else {
+	$reverse = false;
+}
+
+
+$sortable = array('name', 'modified', 'size', 'type', '');
+
+// make sure its one we want to sort by, ignore others
+if (!in_array($sort, $sortable)) {
+	unset($sort);
+}
+
 // go over the files
 $files = array();
 $directories = array();
@@ -56,6 +74,7 @@ $dh = opendir($dirpath);
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
 // thanks http://stackoverflow.com/a/5478353
+// ignorer system files, this file (index.php), and .dir-list-details
 $ignore = array('.', '..', 'index.php', '.dir-list-details');
 
 while (false !== ($file = readdir($dh))) {
@@ -68,7 +87,21 @@ while (false !== ($file = readdir($dh))) {
 	if (!in_array($file, $ignore) and $hiddenFile) {	
 		$filetype = finfo_file($finfo, $file);
 		if ($filetype == "directory") {
-			$directories[$file] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-type" => finfo_file($finfo, $file), "icon" => $imgdir."folder_stroke_16x16.png");
+			if ($sort){
+				if ($sort == "modified") {
+					$name = date("c", filemtime($file)).$file;
+				} else if ($sort == "size") {
+					$name = filesize($file).$file;
+				} else if ($sort == "type") {
+					$name = finfo_file($finfo, $file).$file;
+				} else if ($sort == "name") {
+					$name = $file;
+				} 
+			} else {
+				$name = $file;
+			}
+
+			$directories[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-type" => finfo_file($finfo, $file), "icon" => $imgdir."folder_stroke_16x16.png");
 		} else {
 			if (strstr($filetype, "image")) {
 				$icon = $imgdir."image_16x16.png";
@@ -77,15 +110,54 @@ while (false !== ($file = readdir($dh))) {
 			} else {
 				$icon = $imgdir."cog_16x16.png";
 			}
-			$files[$file] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-size" => format_bytes(filesize($file)), "file-type" => finfo_file($finfo, $file), "icon" => $icon);
+
+			$files[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "file-size" => format_bytes(filesize($file)), "file-type" => finfo_file($finfo, $file), "icon" => $icon);
 		}
 	}
 }
 finfo_close($finfo);
 closedir($dh);
 
-asort($files); asort($directories);
+function sort_date ($a, $b) {
+	return strnatcmp($a["last-modified"], $b["last-modified"]);
+}
+function sort_size ($a, $b) {
+	return strnatcmp($a["file-size"], $b["file-size"]);
+}
+function sort_type ($a, $b) {
+	return strnatcmp($a["file-type"], $b["file-type"]);
+}
+function sort_name ($a, $b) {
+	return strnatcmp($a["filename"], $b["filename"]);
+}
+$reverse_link_modified = "";
+$reverse_link_name = "";
+$reverse_link_type = "";
+$reverse_link_size = "";
 
+if ($sort == "modified") {
+	usort($files, 'sort_date'); 
+	$reverse_link_modified = "!";
+} else if ($sort == "size") {
+	usort($files, 'sort_size'); 
+	$reverse_link_size = "!";
+} else if ($sort == "type") {
+	usort($files, 'sort_type'); 
+	$reverse_link_type = "!";
+} else {
+	usort($files, 'sort_name');
+	$reverse_link_name = "!";
+}
+
+if ($reverse) {
+	$files = array_reverse($files);
+	$reverse_link_modified = "";
+	$reverse_link_name = "";
+	$reverse_link_type = "";
+	$reverse_link_size = "";
+}
+
+asort($directories);
 
 ?>
 <!DOCTYPE html> 
@@ -118,7 +190,8 @@ asort($files); asort($directories);
 				table.dir-list tr.folder td.filename { font-weight: bold; }
 				table.dir-list a { border: 0px; }
 				table.dir-list img { vertical-align:-1px; }
-				tr.folder + tr.file td { padding-top: 1em; }
+				tr.folder + tr.file td { padding-top: .5em; }
+				th a { font-weight: normal; color: #ddd!important; }
 			.spc { margin: 0 .2em 0 .2em; }
 	</style>
 	<title>Directory listing: <?php echo $request; ?></title> 
@@ -137,10 +210,10 @@ asort($files); asort($directories);
 		<article>
 			<table class="dir-list">
 				<tr>
-					<th>filename</th>
-					<th>last modified</th>
-					<th><span class="help" title="approximate">size</span></th>
-					<th>filetype</th>
+					<th><a href="?<?php echo $reverse_link_name; ?>name">filename</a></th>
+					<th><a href="?<?php echo $reverse_link_modified; ?>modified">last modified</a></th>
+					<th><a href="?<?php echo $reverse_link_size; ?>size" class="help" title="approximate">size</a></th>
+					<th><a href="?<?php echo $reverse_link_type; ?>type">filetype</a></th>
 				</tr>
 				<?php 
 				if (count($directories) > 0) {
