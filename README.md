@@ -46,3 +46,10 @@ Helper Files
 Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` from the same directory being displyed and insert it at the top of the current directory listing. There is [a demo for this](http://craft.smarterfish.com/map/) as well.
 
 There is no processing for security, the text contained within `.dir-list-details` is passed through to the browser.
+
+Future
+----
+
+1. Sorting by the various attributes we watch.
+2. Count of items in a folder (not sure about this one; feedback welcome)
+3. Add another "helper file" to force a specific folder/file to be hidden regardless of the specific setting
