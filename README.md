@@ -6,7 +6,7 @@ An empty folder presented by Apache (and others) is very ugly. Now it can be les
 Installation
 ----
 
-Place dir-listing.php anywhere accessible on your web-host of choice. It is recommended to place it somewhere generic, and then link it into other directories.
+You only *really* need @dir-listing.php@, place it somewhere accessible on your web-host of choice. It is recommended to place it somewhere generic, and then link it into other directories.
 
     cd /var/www/bin/
     ln -s ../assets/dir-listing.php ./index.php
