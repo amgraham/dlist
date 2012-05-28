@@ -130,17 +130,19 @@ asort($files); asort($directories);
 					<th>filetype</th>
 				</tr>
 				<?php 
-				foreach ($directories as $file) {
-					echo "<tr class=\"folder\">";
-					echo "<td class=\"filename\">";
-					if ($pretty) {
-						echo "<img src=\"".$file["icon"]."\"/> ";
+				if (count($directories) > 0) {
+					foreach ($directories as $file) {
+						echo "<tr class=\"folder\">";
+						echo "<td class=\"filename\">";
+						if ($pretty) {
+							echo "<img src=\"".$file["icon"]."\"/> ";
+						}
+						echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
+						echo "<td>".$file["last-modified"]."</td>";
+						echo "<td>&mdash;</td>";
+						echo "<td>".$file["file-type"]."</td>";
+						echo "</tr>";
 					}
-					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
-					echo "<td>".$file["last-modified"]."</td>";
-					echo "<td>&mdash;</td>";
-					echo "<td>".$file["file-type"]."</td>";
-					echo "</tr>";
 				}
 				foreach ($files as $file) {
 					echo "<tr>";
