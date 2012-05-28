@@ -1,12 +1,7 @@
 dlist - simple directory listing
 ====
 
-An empty folder presented by Apache (and others) is very ugly. Now it can be less-ugly.
-
-Demo
-----
-
-http://smarterfish.com/assets/
+An empty folder presented by Apache (and others) is very ugly. Now it can be less-ugly. You can view the [demo online](http://smarterfish.com/assets/).
 
 Installation
 ----
@@ -17,6 +12,8 @@ Place dir-listing.php anywhere accessible on your web-host of choice. It is reco
     ln -s ../assets/dir-listing.php ./index.php
 
 I'm very aware that for multiple directories this is a chore, I'm open to suggestions on how to alleviate the initial investment.
+
+There are various settings contained within the file (dir-listing.php) that are set to their safest options. You can adjust them accordingly.
 
 Enhancement
 ----
