@@ -30,9 +30,11 @@ Enhancement
 
 It will look prettier if you also utilize four icons and a web-font, they are "turned off" by default so you can get up and running immediately.
 
-The four icons are from http://somerandomdude.com/work/iconic/ and included in this release for your convenience.
+The four icons are from http://somerandomdude.com/work/iconic/, while the font is Universalis from http://arkandis.tuxfamily.org/adffonts.html both are included in this release for your convenience.
 
-The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and included in this release for your convenience.
+If you decide to beautify your version upload the four icons and web font somewhere easy (read; universally accessible), open `dir-listing.php` in your favorite editor, and change `$pretty` to `true` then update `$imgdir` &amp; `$fontdir` accordingly (wherever you decided to keep the icons and webfont).
+
+A simple refresh in your browser should display the changes.
 
 ### Hidden Files
 
