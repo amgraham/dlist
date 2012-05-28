@@ -8,11 +8,9 @@ There is a [demo available](http://smarterfish.com/assets/) for those people tha
 Installation
 ----
 
-You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php) and place it somewhere accessible on your web-host of choice.
+You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments]((#enhancement)) you might need to make, and place it somewhere accessible on your web-host of choice.
 
-There are various settings contained within the file that are set to their safest/blandest options. You can [adjust them accordingly](#enhancement). 
-
-It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated "helper files" will need to go into the linked directories.
+It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated "helper files" will need to go within the various directories that require them.
 
     cd /var/www/bin/
     ln -s ../assets/dir-listing.php ./index.php
@@ -28,8 +26,18 @@ I'm very aware that for multiple directories this is a chore, I'm [open to sugge
 Enhancement
 ----
 
+### General Prettiness
+
 It will look prettier if you also utilize four icons and a web-font, they are "turned off" by default so you can get up and running immediately.
 
 The four icons are from http://somerandomdude.com/work/iconic/ and included in this release for your convenience.
 
 The font is Universalis from http://arkandis.tuxfamily.org/adffonts.html and included in this release for your convenience.
+
+### Hidden Files
+
+By default, dlist will not display hidden files (some call them "dot-files") within the current directory; this is intentional and recommended.
+
+If you decide to display hidden files, dlist will still hide it's various "helper files."
+
+### 
