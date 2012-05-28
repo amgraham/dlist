@@ -55,9 +55,8 @@ $dirpath = ".";
 $dh = opendir($dirpath);
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-
-$ignore = array('.', '..', 'index.php');
-
+// thanks http://stackoverflow.com/a/5478353
+$ignore = array('.', '..', 'index.php', '.dir-list-details');
 
 while (false !== ($file = readdir($dh))) {
 	if ($showhidden) {
