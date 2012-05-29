@@ -1,5 +1,5 @@
 <?php 
-// upload this file (and the four icons) somewhere accessible on your web-host
+// upload this file (along with the icons and font) somewhere accessible on your web-host
 // link other directories to that file:
 	// ln -s ../assets/php/dir-listing.php ./index.php
 // enjoy!
@@ -7,21 +7,21 @@
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
-// your image directory
 $imgdir = "http://smarterfish.com/assets/img/iconic/raster/black/";
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
 // make it a web-font and place it in the following directory (or use the included version)
-// your font directory
 $fontdir = "http://smarterfish.com/assets/fonts/";
 
 // set this to true if you have setup the four icons and web-font
+// make sure you place the respective files in an accessible location
 $pretty = false;
 
 // would you like to show hidden files? (recommendation: false)
 $showhidden = false;
 
+// a human readable filesize
 function format_bytes($size) {
 	// via: http://www.php.net/manual/en/function.filesize.php#100097
     $units = array(' B', ' KB', ' MB', ' GB', ' TB');
@@ -29,126 +29,107 @@ function format_bytes($size) {
     return number_format(round($size, 2)).$units[$i];
 }
 
-// the rest is hand-built
+// various sorting functions
+function sort_date ($a, $b) { return strnatcmp($a["last-modified-raw"], $b["last-modified-raw"]); }
+function sort_size ($a, $b) { return strnatcmp($a["file-size-raw"], $b["file-size-raw"]); }
+function sort_type ($a, $b) { return strnatcmp($a["file-type"], $b["file-type"]); }
+function sort_name ($a, $b) { return strnatcmp($a["filename"], $b["filename"]); }
+
+// these are the holders to set reverse order for sorting
+$rlm = ""; $rln = ""; $rlt = ""; $rls = "";
 
 // build the links for navigation
 $request = $_SERVER["REQUEST_URI"];
 $splitRequest = split("/", $request);
 $urlLinks = "<a href=\"http://".$_SERVER["HTTP_HOST"]."\">".$_SERVER["HTTP_HOST"]."</a><span class=\"spc\"/>/</span>";
+// the first and last are empty
 array_shift($splitRequest); array_pop($splitRequest);
-$links = "http://".$_SERVER["HTTP_HOST"]."/";
-foreach ($splitRequest as $splitItem) {
-	$links .= $splitItem."/";
-	$urlLinks.= "<a href=\"".$links."\">".$splitItem."</a><span class=\"spc\"/>/</span>";
-}
+// the beginning of our links                 // and the rest
+$links = "http://".$_SERVER["HTTP_HOST"]."/"; foreach ($splitRequest as $splitItem) { $links .= $splitItem."/"; $urlLinks.= "<a href=\"".$links."\">".$splitItem."</a><span class=\"spc\"/>/</span>"; }
+
 // look for a details file
 // keep in mind the .dir-list-details file needs to be in the directory currently being displayed, not the installation directory.
-$details = false;
-if (file_exists(".dir-list-details")) {
-	$details = file_get_contents(".dir-list-details");
-}
+$details = false; if (file_exists(".dir-list-details")) { $details = file_get_contents(".dir-list-details"); }
 
 // figure out the sorting
-$sort = $_SERVER["QUERY_STRING"];
+$sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = true; $sort = str_replace("!", "", $sort); } else { $reverse = false; }
 
-if (substr($sort, 0, 1) == "!") {
-	$reverse = true;
-	$sort = str_replace("!", "", $sort);
-} else {
-	$reverse = false;
-}
+// via: http://stackoverflow.com/a/5478353
+// ignore system files, this file (index.php), and .dir-list-details
+$ignore = array('.', '..', 'index.php', '.dir-list-details');
 
-
+// sortable by these only, nothing else
 $sortable = array('name', 'modified', 'size', 'type', '');
 
 // make sure its one we want to sort by, ignore others
-if (!in_array($sort, $sortable)) {
-	unset($sort);
-}
+if (!in_array($sort, $sortable)) { unset($sort); }
 
-// go over the files
-$files = array();
-$directories = array();
-$dirpath = ".";
-$dh = opendir($dirpath);
-$finfo = finfo_open(FILEINFO_MIME_TYPE);
+// go over the files create our two arrays for later, one for folders and another for files, and open a file info handle
+$dh = opendir("."); $files = array(); $directories = array(); $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-// thanks http://stackoverflow.com/a/5478353
-// ignorer system files, this file (index.php), and .dir-list-details
-$ignore = array('.', '..', 'index.php', '.dir-list-details');
+/* begin processing the current directory */
 
 while (false !== ($file = readdir($dh))) {
-	if ($showhidden) {
-		$hiddenFile = true;
-	} else {
-		$hiddenFile = substr($file, 0, 1) != ".";
-	}
-	// make sure the filename isn't a dot-file, this file, or the details file.
-	if (!in_array($file, $ignore) and $hiddenFile) {	
-		$filetype = finfo_file($finfo, $file);
-		if ($filetype == "directory") {
-			$directories[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)), "last-modified-raw" => date("c", filemtime($file)), "file-type" => finfo_file($finfo, $file), "file-size-raw" => 0, "icon" => $imgdir."folder_stroke_16x16.png");
-		} else {
-			if (strstr($filetype, "image")) {
-				$icon = $imgdir."image_16x16.png";
-			} elseif (strstr($filetype, "text")) {
-				$icon = $imgdir."document_stroke_16x16.png";
-			} else {
-				$icon = $imgdir."cog_16x16.png";
-			}
 
-			$files[] = array("filename" => $file, "last-modified" => date("D j M Y h:i A T", filemtime($file)),"last-modified-raw" => date("c", filemtime($file)), "file-size" => format_bytes(filesize($file)), "file-size-raw" => filesize($file), "file-type" => finfo_file($finfo, $file), "icon" => $icon);
+	// do we want to show hidden files?
+	if ($showhidden) { 	$hiddenFile = true;
+	} else { 			$hiddenFile = substr($file, 0, 1) != ".";
+	}
+
+	// make sure the filename isn't a dot-file, this file, or the details file.
+	if (!in_array($file, $ignore) and $hiddenFile) { $filetype = finfo_file($finfo, $file);
+
+		// directories are different, and treated as such from folders (below)
+		if ($filetype == "directory") { 
+			// we know what icon to use, these are all folders
+			$directories[] = array(
+				"filename" => 			$file, 
+				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)), 
+				"last-modified-raw" => 	date("c", filemtime($file)), 
+				"file-type" => 			finfo_file($finfo, $file), 
+				"file-size-raw" => 		0, 
+				"icon" => 				$imgdir."folder_stroke_16x16.png");
+
+		// these are files
+		} else {
+			// what icon should we use?
+			// keep in mind if $pretty if false, none of this matters
+			if ($pretty) {
+
+				if (strstr($filetype, "image")) { 		$icon = $imgdir."image_16x16.png";
+				} elseif (strstr($filetype, "text")) { 	$icon = $imgdir."document_stroke_16x16.png";
+				} else { 								$icon = $imgdir."cog_16x16.png";}
+
+			} else { $icon = false;}
+
+			$files[] = array(
+				"filename" => 			$file, 
+				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)), 
+				"last-modified-raw" => 	date("c", filemtime($file)), 
+				"file-size" => 			format_bytes(filesize($file)), 
+				"file-size-raw" => 		filesize($file), 
+				"file-type" => 			finfo_file($finfo, $file), 
+				"icon" => 				$icon);
 		}
 	}
 }
-finfo_close($finfo);
-closedir($dh);
+// close the fileinfo link & directory
+finfo_close($finfo); closedir($dh);
 
-function sort_date ($a, $b) {
-	return strnatcmp($a["last-modified-raw"], $b["last-modified-raw"]);
-}
-function sort_size ($a, $b) {
-	return strnatcmp($a["file-size-raw"], $b["file-size-raw"]);
-}
-function sort_type ($a, $b) {
-	return strnatcmp($a["file-type"], $b["file-type"]);
-}
-function sort_name ($a, $b) {
-	return strnatcmp($a["filename"], $b["filename"]);
-}
-$reverse_link_modified = "";
-$reverse_link_name = "";
-$reverse_link_type = "";
-$reverse_link_size = "";
 
-if ($sort == "modified") {
-	usort($files, 'sort_date'); 
-	usort($directories, 'sort_date'); 
-	$reverse_link_modified = "!";
-} else if ($sort == "size") {
-	usort($files, 'sort_size'); 
-	usort($directories, 'sort_size'); 
-	$reverse_link_size = "!";
-} else if ($sort == "type") {
-	usort($files, 'sort_type'); 
-	usort($directories, 'sort_type'); 
-	$reverse_link_type = "!";
-} else {
-	usort($files, 'sort_name');
-	usort($directories, 'sort_name'); 
-	$reverse_link_name = "!";
+if ($sort == "modified") { 		usort($files, 'sort_date'); usort($directories, 'sort_date'); $rlm = "!";
+} else if ($sort == "size") { 	usort($files, 'sort_size'); usort($directories, 'sort_size'); $rls = "!";
+} else if ($sort == "type") { 	usort($files, 'sort_type'); usort($directories, 'sort_type'); $rlt = "!";
+} else { 						usort($files, 'sort_name'); usort($directories, 'sort_name'); $rln = "!";
 }
 
 if ($reverse) {
+	// reverse the files
 	$files = array_reverse($files);
 	// type and size doesn't change for directories (size, for now)
-	if (($sort != "size") and ($sort != "type")) {
-		$directories = array_reverse($directories);
-	}
-	$reverse_link_modified = "";
-	$reverse_link_name = "";
-	$reverse_link_type = "";
-	$reverse_link_size = "";
+	if (($sort != "size") and ($sort != "type")) { $directories = array_reverse($directories); }
+	// we're reversed, we want normal sorting first
+	$rlm = ""; $rln = ""; $rlt = ""; $rls = "";
 }
 
 ?>
@@ -202,19 +183,17 @@ if ($reverse) {
 		<article>
 			<table class="dir-list">
 				<tr>
-					<th><a href="?<?php echo $reverse_link_name; ?>name">filename</a></th>
-					<th><a href="?<?php echo $reverse_link_modified; ?>modified">last modified</a></th>
-					<th><a href="?<?php echo $reverse_link_size; ?>size" class="help" title="approximate">size</a></th>
-					<th><a href="?<?php echo $reverse_link_type; ?>type">filetype</a></th>
+					<th><a href="?<?php echo $rln; ?>name">filename</a></th>
+					<th><a href="?<?php echo $rlm; ?>modified">last modified</a></th>
+					<th><a href="?<?php echo $rls; ?>size" class="help" title="approximate">size</a></th>
+					<th><a href="?<?php echo $rlt; ?>type">filetype</a></th>
 				</tr>
 				<?php 
 				if (count($directories) > 0) {
 					foreach ($directories as $file) {
 						echo "<tr class=\"folder\">";
 						echo "<td class=\"filename\">";
-						if ($pretty) {
-							echo "<img src=\"".$file["icon"]."\"/> ";
-						}
+						if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
 						echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
 						echo "<td>".$file["last-modified"]."</td>";
 						echo "<td>&mdash;</td>";
@@ -225,9 +204,7 @@ if ($reverse) {
 				foreach ($files as $file) {
 					echo "<tr class=\"file\">";
 					echo "<td class=\"filename\">";
-					if ($pretty) {
-						echo "<img src=\"".$file["icon"]."\"/> ";
-					}
+					if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
 					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
 					echo "<td>".$file["last-modified"]."</td>";
 					echo "<td>".$file["file-size"]."</td>";
