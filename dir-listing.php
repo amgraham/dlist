@@ -7,7 +7,7 @@
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
-$imgdir = "http://smarterfish.com/assets/img/iconic/raster/black/";
+$imgdir = "http://smarterfish.com/assets/img/iconic/black/";
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
@@ -20,6 +20,13 @@ $pretty = false;
 
 // would you like to show hidden files? (recommendation: false)
 $showhidden = false;
+
+// get the ignore file
+$hidden = false; 
+if (file_exists(".dir-list-ignore")) { 
+	$hidden = file_get_contents(".dir-list-ignore"); 
+	$hidden = split("\n", $hidden);
+}
 
 // a human readable filesize
 function format_bytes($size) {
@@ -56,7 +63,9 @@ $sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = t
 
 // via: http://stackoverflow.com/a/5478353
 // ignore system files, this file (index.php), and .dir-list-details
-$ignore = array('.', '..', 'index.php', '.dir-list-details');
+$ignore = array('.', '..', 'index.php', '.dir-list-details', '.dir-list-ignore');
+// merge with the files from '.dir-list-details'
+$ignore = array_merge($ignore, $hidden);
 
 // sortable by these only, nothing else
 $sortable = array('name', 'modified', 'size', 'type', '');
