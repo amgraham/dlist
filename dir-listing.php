@@ -1,6 +1,6 @@
 <?php 
 // upload this file (along with the icons and font) somewhere accessible on your web-host
-// link other directories to that file:
+// link other directories to that file for simplicity:
 	// ln -s ../assets/php/dir-listing.php ./index.php
 // enjoy!
 
@@ -62,7 +62,7 @@ $details = false; if (file_exists(".dir-list-details")) { $details = file_get_co
 $sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = true; $sort = str_replace("!", "", $sort); } else { $reverse = false; }
 
 // via: http://stackoverflow.com/a/5478353
-// ignore system files, this file (index.php), and .dir-list-details
+// ignore system files, this file (index.php), .dir-list-details, and .dir-list-ignore
 $ignore = array('.', '..', 'index.php', '.dir-list-details', '.dir-list-ignore');
 // merge with the files from '.dir-list-details'
 $ignore = array_merge($ignore, $hidden);
