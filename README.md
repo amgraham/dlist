@@ -64,4 +64,4 @@ Future
 ----
 
 1. Count of items in a folder (not sure about this one; feedback welcome)
-2. Add another "helper file" to force a specific folder/file to be hidden regardless of the specific setting
+2. Modify the ignore helper file to be able to perform simple regex/wildcard matching.
