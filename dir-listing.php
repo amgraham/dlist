@@ -54,8 +54,7 @@ $details = false; if (file_exists(".dir-list-details")) { $details = file_get_co
 // figure out the sorting
 $sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = true; $sort = str_replace("!", "", $sort); } else { $reverse = false; }
 
-
-// get the ignore file
+// get the ignore file, make it an array now, so if it doesn't exist, we can safely ignore it.
 $hidden = array(); 
 if (file_exists(".dir-list-ignore")) { 
 	$hidden = file_get_contents(".dir-list-ignore"); 

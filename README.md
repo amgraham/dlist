@@ -50,9 +50,13 @@ You can override the default and change `$showhidden` to `true` and have dlist m
 Helper Files
 ----
 
-Currently there is one helper file in use: `.dir-list-details`. It will take whatever is contained in the file `.dir-list-details` from the same directory being displyed and insert it at the top of the current directory listing. There is a [demo displaying this in action](http://craft.smarterfish.com/map/).
+Currently there are two helper files in use: `.dir-list-details` and `.dir-list-ignore`. 
+
+The first will take whatever is contained in the file `.dir-list-details` from the same directory being displyed and insert it at the top of the current directory listing. There is a [demo displaying this in action](http://craft.smarterfish.com/map/).
 
 There is no processing for security, the text contained within `.dir-list-details` is passed directly to the browser.
+
+The second will be read line-by-line and used in ignoring files for that directory, there are currently no options for regex or wildcards, just simple text.
 
 Future
 ----
