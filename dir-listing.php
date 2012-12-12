@@ -148,34 +148,31 @@ if ($reverse) {
 <head> 
 	<meta charset="UTF-8" /> 
 	<style type="text/css">
-		@font-face { font-family: 'UniversalisADFStdRegular'; src: url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.eot') format('eot'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.woff') format('woff'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.ttf') format('truetype'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
-		html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}
-			html { }
-			<?php if ($pretty) { ?>
-			body { font-size: 1em; color: #333; line-height: 1.2em;font-family: sans-serif; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
-			<?php } else { ?>
-			body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
-			<?php } ?>
-			p { line-height:1.3em; }
-			p,hr,h1,table{margin-bottom:.1em;}
-			a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
-			a:hover, a:visited:hover, *[onclick]:hover  { border-bottom: 1px solid #83b0fe; color: #2e52a4;}
-			header { margin-bottom: 1em; } 
-				header h1 {font-size:1.7em; margin: 0; padding: 0; display: inline-block;}
-			section { padding: 0; margin: 0; }
-			article { margin-top: .5em; }
-				article#details { margin-bottom: 1em; }
-			.help { cursor: help; border-bottom: 1px dashed #ddd; }
-			ol.inline li { display: inline !important; }
-			table.dir-list { width: 100%; }
-				table.dir-list th { color: #ddd; }
-				table.dir-list td { margin: 2px 5px; padding-bottom: .25em; }
-				table.dir-list tr.folder td.filename { font-weight: bold; }
-				table.dir-list a { border: 0px; }
-				table.dir-list img { vertical-align:-1px; }
-				tr.folder + tr.file td { padding-top: .5em; }
-				th a { font-weight: normal; color: #ddd!important; }
-			.spc { margin: 0 .2em 0 .2em; }
+		<?php if ($pretty) { ?>@font-face { font-family: 'UniversalisADFStdRegular'; src: url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.eot') format('eot'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.woff') format('woff'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.ttf') format('truetype'), url(<?php echo $fontdir; ?>'universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
+		<?php } ?>html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}
+		html { }
+		<?php if ($pretty) { ?>body { font-size: 1em; color: #333; line-height: 1.2em;font-family: sans-serif; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
+		<?php } else { ?>body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
+		<?php } ?>p { line-height:1.3em; }
+		p,hr,h1,table{margin-bottom:.1em;}
+		a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
+		a:hover, a:visited:hover, *[onclick]:hover  { border-bottom: 1px solid #83b0fe; color: #2e52a4;}
+		header { margin-bottom: 1em; } 
+			header h1 {font-size:1.7em; margin: 0; padding: 0; display: inline-block;}
+		section { padding: 0; margin: 0; }
+		article { margin-top: .5em; }
+			article#details { margin-bottom: 1em; }
+		.help { cursor: help; border-bottom: 1px dashed #ddd; }
+		ol.inline li { display: inline !important; }
+		table.dir-list { width: 100%; }
+			table.dir-list th { color: #ddd; }
+			table.dir-list td { margin: 2px 5px; padding-bottom: .25em; }
+			table.dir-list tr.folder td.filename { font-weight: bold; }
+			table.dir-list a { border: 0px; }
+			table.dir-list img { vertical-align:-1px; }
+			tr.folder + tr.file td { padding-top: .5em; }
+			th a { font-weight: normal; color: #ddd!important; }
+		.spc { margin: 0 .2em 0 .2em; }
 	</style>
 	<title>Directory listing: <?php echo $request; ?></title> 
 </head> 
