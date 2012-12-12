@@ -7,26 +7,19 @@
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
-$imgdir = "http://smarterfish.com/assets/img/iconic/black/";
+$imgdir = "http://aramaki/dev/dlist/img/";
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
 // make it a web-font and place it in the following directory (or use the included version)
-$fontdir = "http://smarterfish.com/assets/fonts/";
+$fontdir = "http://aramaki/dev/dlist/fonts/";
 
 // set this to true if you have setup the four icons and web-font
 // make sure you place the respective files in an accessible location
-$pretty = false;
+$pretty = true;
 
 // would you like to show hidden files? (recommendation: false)
 $showhidden = false;
-
-// get the ignore file
-$hidden = false; 
-if (file_exists(".dir-list-ignore")) { 
-	$hidden = file_get_contents(".dir-list-ignore"); 
-	$hidden = split("\n", $hidden);
-}
 
 // a human readable filesize
 function format_bytes($size) {
@@ -61,10 +54,18 @@ $details = false; if (file_exists(".dir-list-details")) { $details = file_get_co
 // figure out the sorting
 $sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = true; $sort = str_replace("!", "", $sort); } else { $reverse = false; }
 
+
+// get the ignore file
+$hidden = array(); 
+if (file_exists(".dir-list-ignore")) { 
+	$hidden = file_get_contents(".dir-list-ignore"); 
+	$hidden = split("\n", $hidden);
+}
+
 // via: http://stackoverflow.com/a/5478353
 // ignore system files, this file (index.php), .dir-list-details, and .dir-list-ignore
 $ignore = array('.', '..', 'index.php', '.dir-list-details', '.dir-list-ignore');
-// merge with the files from '.dir-list-details'
+// merge with the files from '.dir-list-ignore'
 $ignore = array_merge($ignore, $hidden);
 
 // sortable by these only, nothing else
