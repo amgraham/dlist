@@ -65,3 +65,4 @@ Future
 
 1. Count of items in a folder (not sure about this one; feedback welcome)
 2. Modify the ignore helper file to be able to perform simple regex/wildcard matching.
+3. Combine the few helper files we utilize into one simpler format.

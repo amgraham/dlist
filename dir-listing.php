@@ -162,7 +162,6 @@ if ($reverse) {
 		article { margin-top: .5em; }
 			article#details { margin-bottom: 1em; }
 		.help { cursor: help; border-bottom: 1px dashed #ddd; }
-		ol.inline li { display: inline !important; }
 		table.dir-list { width: 100%; }
 			table.dir-list th { color: #ddd; }
 			table.dir-list td { margin: 2px 5px; padding-bottom: .25em; }
