@@ -7,18 +7,19 @@
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
-$imgdir = "http://aramaki/dev/dlist/img/";
+$imgdir = "http://aramaki/assets/images/iconic/raster/black/";
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
 // make it a web-font and place it in the following directory (or use the included version)
-$fontdir = "http://aramaki/dev/dlist/fonts/";
+$fontdir = "http://aramaki/assets/fonts/";
 
 // set this to true if you have setup the four icons and web-font
 // make sure you place the respective files in an accessible location
 $pretty = true;
 
 // would you like to show hidden files? (recommendation: false)
+// also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
 $showhidden = false;
 
 // a human readable filesize
