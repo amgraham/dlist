@@ -30,13 +30,13 @@
       <section>
         <h1>dlist - simple directory listing</h1>
 
-<p>An empty folder presented by <a href="http://apache.org">Apache</a> (and others) is very ugly. <a href="https://github.com/amgraham/dlist">dlist</a> strives to replace the default in a less-ugly, and slightly-more-useful manner. </p>
+<p>An empty folder presented by <a href="http://apache.org">Apache</a> (and others) is very ugly. <a href="https://github.com/amgraham/dlist">dlist</a> strives to replace the default in a less-ugly, and slightly-more-useful manner. I hope you find it useful.</p>
 
 <h2>Features</h2>
 
 <p>dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.</p>
 
-<p>There is a <a href="http://smarterfish.com/assets/">demo available</a> that showcases the various features and design of dlist. Another <a href="http://craft.smarterfish.com/map/">demo is available</a> that showcases the <a href="#helper-files">details helper file</a> feature.</p>
+<p>There is a <a href="http://smarterfish.com/assets/">demo available</a> that showcases the various features and design of dlist. Another <a href="http://craft.smarterfish.com/map/">demo is available</a> that showcases some of the <a href="#helper-files">helper file</a> feature.</p>
 
 <h2>Installation</h2>
 
@@ -48,11 +48,14 @@
 ln -s ../assets/dir-listing.php ./index.php
 </code></pre>
 
-<p>If you wanted to have a <code>.dir-list-details</code> file as well, it must be placed in the same directory.</p>
+<p>If you wanted to have a <code>.dir-list</code> file as well, it must be placed in the same directory.</p>
 
-<pre><code>cd /var/www/bin/
-cat &gt; .dir-list-details
-&lt;p&gt;Hello there!&lt;/p&gt;
+<pre><code>#/var/www/bin/.dir-list
+&lt;?php 
+$ignore = array("markdown.php", "secret-file.html");
+
+$details = "A small collection of &lt;em&gt;hopefully&lt;/em&gt; helpful documents.";
+?&gt;
 </code></pre>
 
 <p>I'm very aware that for multiple directories this is a chore, I'm <a href="https://github.com/amgraham/dlist/issues">open to suggestions</a> on how to alleviate the initial investment.</p>
@@ -61,11 +64,11 @@ cat &gt; .dir-list-details
 
 <h3>General Prettiness</h3>
 
-<p>It will look prettier if you also utilize four icons and a web-font, they are "turned off" by default so you can get up and running immediately.</p>
+<p>It will look prettier if you also utilize four icons and a web-font, they are "turned on" by default so you can get up and running immediately.</p>
 
 <p>The four icons are from <a href="http://somerandomdude.com/work/iconic/">http://somerandomdude.com/work/iconic/</a>, while the font is Universalis from <a href="http://arkandis.tuxfamily.org/adffonts.html">http://arkandis.tuxfamily.org/adffonts.html</a> both are included in this release for your convenience.</p>
 
-<p>If you decide to beautify your version upload the four icons and web font somewhere easy (read; universally accessible), open <code>dir-listing.php</code> in your favorite editor, and change <code>$pretty</code> to <code>true</code> then update <code>$imgdir</code> &amp; <code>$fontdir</code> accordingly (wherever you decided to keep the icons and webfont).</p>
+<p>You should beautify your installation and upload the four icons and web font somewhere easy (read; universally accessible), open <code>dir-listing.php</code> in your favorite editor, and update <code>$imgdir</code> &amp; <code>$fontdir</code> accordingly (wherever you decided to keep the icons and webfont).</p>
 
 <p>A refresh of your browser should display the changes.</p>
 
@@ -73,26 +76,27 @@ cat &gt; .dir-list-details
 
 <p>By default, dlist will not display hidden files (some call them "dot-files") within the current directory; this is intentional and recommended.</p>
 
-<p>You can override the default and change <code>$showhidden</code> to <code>true</code> and have dlist make your hidden files available for all the world to see. <strong>This is not recommended.</strong> If you follow the recomendation or not, dlist will not show it's <a href="#helper-files">helper files</a>.</p>
-
-<p>You can also add your own files to excluded by use of our <code>.dir-list-ignore</code> <a href="#helper-files">helper file</a>.</p>
+<p>You can override the default and change <code>$showhidden</code> to <code>true</code> and have dlist make your hidden files available for all the world to see. <strong>This is not recommended.</strong> If you follow the recommendation or not, dlist will not show it's <a href="#helper-files">helper files</a>, you can also add your own files to excluded by use of our <a href="#helper-files">helper file</a> <code>$ignore</code> variable.</p>
 
 <h2>Helper Files</h2>
 
-<p>Currently there are two helper files in use: <code>.dir-list-details</code> and <code>.dir-list-ignore</code>. </p>
+<p>There is one helper file in use: <code>.dir-list</code>, it currently has two options: <code>$ignore</code> &amp; <code>$details</code>.</p>
 
-<p>The first will take whatever is contained in the file <code>.dir-list-details</code> from the same directory being displyed and insert it at the top of the current directory listing. There is a <a href="http://craft.smarterfish.com/map/">demo displaying this in action</a>.</p>
+<p>The first will take whatever is contained in the the array and remove it from being displayed within the rendered page:</p>
 
-<p>There is no processing for security, the text contained within <code>.dir-list-details</code> is passed directly to the browser.</p>
+<pre><code>$ignore = array("markdown.php", "secret-file.html");
+</code></pre>
 
-<p>The second will be read line-by-line and used in ignoring files for that directory, there are currently no options for regex or wildcards, just simple text.</p>
+<p>The second will allow you to include some introductory text at the top of the page:</p>
+
+<pre><code>$details = "A small collection of &lt;em&gt;hopefully&lt;/em&gt; helpful documents.";
+</code></pre>
 
 <h2>Future</h2>
 
 <ol>
 <li>Count of items in a folder (not sure about this one; feedback welcome)</li>
-<li>Modify the ignore helper file to be able to perform simple regex/wildcard matching.</li>
-<li>Combine the few helper files we utilize into one simpler format.</li>
+<li>Modify the helper file to be able to perform simple regex/wildcard matching.</li>
 </ol>
       </section>
       <footer>
