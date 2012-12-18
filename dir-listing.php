@@ -22,6 +22,12 @@ $pretty = true;
 // also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
 $showhidden = false;
 
+// get the ignore file, make it an array now, so if it doesn't exist, we can safely ignore it.
+$ignore = array(); // empty array for errorless merging later
+if (file_exists(".dir-list")) { 
+	include(".dir-list"); 
+}
+
 // a human readable filesize
 function format_bytes($size) {
 	// via: http://www.php.net/manual/en/function.filesize.php#100097
@@ -48,25 +54,12 @@ array_shift($splitRequest); array_pop($splitRequest);
 // the beginning of our links                 // and the rest
 $links = "http://".$_SERVER["HTTP_HOST"]."/"; foreach ($splitRequest as $splitItem) { $links .= $splitItem."/"; $urlLinks.= "<a href=\"".$links."\">".$splitItem."</a><span class=\"spc\"/>/</span>"; }
 
-// look for a details file
-// keep in mind the .dir-list-details file needs to be in the directory currently being displayed, not the installation directory.
-$details = false; if (file_exists(".dir-list-details")) { $details = file_get_contents(".dir-list-details"); }
-
 // figure out the sorting
 $sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = true; $sort = str_replace("!", "", $sort); } else { $reverse = false; }
 
-// get the ignore file, make it an array now, so if it doesn't exist, we can safely ignore it.
-$hidden = array(); 
-if (file_exists(".dir-list-ignore")) { 
-	$hidden = file_get_contents(".dir-list-ignore"); 
-	$hidden = split("\n", $hidden);
-}
-
 // via: http://stackoverflow.com/a/5478353
-// ignore system files, this file (index.php), .dir-list-details, and .dir-list-ignore
-$ignore = array('.', '..', 'index.php', '.dir-list-details', '.dir-list-ignore');
-// merge with the files from '.dir-list-ignore'
-$ignore = array_merge($ignore, $hidden);
+// merge with the files from '.dir-list'
+$ignore = array_merge(array('.', '..', 'index.php', '.dir-list'), $ignore);
 
 // sortable by these only, nothing else
 $sortable = array('name', 'modified', 'size', 'type', '');
@@ -125,7 +118,6 @@ while (false !== ($file = readdir($dh))) {
 }
 // close the fileinfo link & directory
 finfo_close($finfo); closedir($dh);
-
 
 if ($sort == "modified") { 		usort($files, 'sort_date'); usort($directories, 'sort_date'); $rlm = "!";
 } else if ($sort == "size") { 	usort($files, 'sort_size'); usort($directories, 'sort_size'); $rls = "!";

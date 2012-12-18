@@ -1,0 +1,8 @@
+<?php
+
+$ignore = array(
+	"markdown.php");
+
+$details = "A small collection of <em>hopefully</em> helpful documents.";
+
+?>
