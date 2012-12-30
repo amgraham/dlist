@@ -173,7 +173,7 @@ if ($reverse) {
 	</header>
 	
 	<section>
-		<?php if ($details) { ?>
+		<?php if (@$details) { ?>
 		<article id="details">
 			<?php echo $details; ?>
 		</article>
