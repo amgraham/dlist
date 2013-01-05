@@ -33,14 +33,14 @@ If you wanted to have a `.dir-list` file as well, it must be placed in the same 
 
 I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
 
-Enhancement
+Enhancement 	{#enhancement}
 ----
 
 ### General Prettiness
 
 It will look prettier if you also utilize four icons and a web-font, they are "turned on" by default so you can get up and running immediately.
 
-The four icons are from http://somerandomdude.com/work/iconic/, while the font is Universalis from http://arkandis.tuxfamily.org/adffonts.html both are included in this release for your convenience.
+The four icons are from <http://somerandomdude.com/work/iconic/>, while the font is Universalis from <http://arkandis.tuxfamily.org/adffonts.html> both are included in this release for your convenience.
 
 You should beautify your installation and upload the four icons and web font somewhere easy (read; universally accessible), open `dir-listing.php` in your favorite editor, and update `$imgdir` &amp; `$fontdir` accordingly (wherever you decided to keep the icons and webfont).
 
