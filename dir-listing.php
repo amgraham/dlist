@@ -4,6 +4,9 @@
 	// ln -s ../assets/php/dir-listing.php ./index.php
 // enjoy!
 
+// the following two are only required if you set $pretty to true
+// the third only if you want to handle markdown text specially
+
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
@@ -14,34 +17,41 @@ $imgdir = "http://aramaki/assets/images/iconic/raster/black/";
 // make it a web-font and place it in the following directory (or use the included version)
 $fontdir = "http://aramaki/assets/fonts/";
 
+
+
+// remember, only required if you want to handle markdown files specially
+
 // processess markdown with markdown (oddly enough)!
 // http://daringfireball.net/projects/markdown
-// change this to match your setup
+// place them in the following directory 
 $handlerdir = "/var/www/dev/dlist/handlers/";
 
 // set this to true if you have setup the four icons and web-font
 // make sure you place the respective files in an accessible location
 $pretty = true;
 
+// there is no setting for turning handlers 'on'
+// if you want to process markdown files specially then add the following lines to your top-most .htaccess file:
+/*
+
+	RewriteEngine On
+	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
+
+*/
+// just remember to change dir-listing.php (in the snippet above) to match the top-most copy of this file.
+
+
 // would you like to show hidden files? (recommendation: false)
 // also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
 $showhidden = false;
 
-/* STOP EDITING */
+/* STOP EDITING */ // of course, you're more than welcome to poke around, but any alterations below may lead to issues/problems
 
-$markdown = false;
-if (@$_GET["action"] == "markdown") {
-	// checking for $markdown is mch less typing
-	$markdown = true;
-	// accidentally I had the browser window be titles the requested file, and left out the header we create, but I prefer it "light" now, no back/up button, generated file name, very clean.
-	$title = $_GET["file"].".md";
-}
+$markdown = false; if (@$_GET["action"] == "markdown") { $markdown = true; $title = $_GET["file"].".md"; }
 
 // get the ignore file, make it an array now, so if it doesn't exist, we can safely ignore it.
 $ignore = array(); // empty array for errorless merging later
-if (file_exists(".dir-list")) { 
-	include(".dir-list"); 
-}
+if (file_exists(".dir-list")) { include(".dir-list"); }
 
 // a human readable filesize
 function format_bytes($size) {
