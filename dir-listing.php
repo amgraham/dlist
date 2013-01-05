@@ -31,14 +31,10 @@ $showhidden = false;
 
 $markdown = false;
 if (@$_GET["action"] == "markdown") {
+	// checking for $markdown is mch less typing
 	$markdown = true;
-	// perform some light processsing to change underscore and dash into spaces.
+	// accidentally I had the browser window be titles the requested file, and left out the header we create, but I prefer it "light" now, no back/up button, generated file name, very clean.
 	$title = $_GET["file"].".md";
-	// turn it into an array on "/"
-	//$title = split("/", $title);
-	// all we care about is the last one
-	//$title = end($title).".md";
-	// a little capitalization
 }
 
 // get the ignore file, make it an array now, so if it doesn't exist, we can safely ignore it.
