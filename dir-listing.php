@@ -14,6 +14,11 @@ $imgdir = "http://aramaki/assets/images/iconic/raster/black/";
 // make it a web-font and place it in the following directory (or use the included version)
 $fontdir = "http://aramaki/assets/fonts/";
 
+// processess markdown with markdown (oddly enough)!
+// http://daringfireball.net/projects/markdown
+// change this to match your setup
+$handlerdir = "/var/www/dev/dlist/handlers/";
+
 // set this to true if you have setup the four icons and web-font
 // make sure you place the respective files in an accessible location
 $pretty = true;
@@ -21,6 +26,20 @@ $pretty = true;
 // would you like to show hidden files? (recommendation: false)
 // also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
 $showhidden = false;
+
+/* STOP EDITING */
+
+$markdown = false;
+if (@$_GET["action"] == "markdown") {
+	$markdown = true;
+	// perform some light processsing to change underscore and dash into spaces.
+	$title = $_GET["file"].".md";
+	// turn it into an array on "/"
+	//$title = split("/", $title);
+	// all we care about is the last one
+	//$title = end($title).".md";
+	// a little capitalization
+}
 
 // get the ignore file, make it an array now, so if it doesn't exist, we can safely ignore it.
 $ignore = array(); // empty array for errorless merging later
@@ -119,9 +138,9 @@ while (false !== ($file = readdir($dh))) {
 // close the fileinfo link & directory
 finfo_close($finfo); closedir($dh);
 
-if ($sort == "modified") { 		usort($files, 'sort_date'); usort($directories, 'sort_date'); $rlm = "!";
-} else if ($sort == "size") { 	usort($files, 'sort_size'); usort($directories, 'sort_size'); $rls = "!";
-} else if ($sort == "type") { 	usort($files, 'sort_type'); usort($directories, 'sort_type'); $rlt = "!";
+if (@$sort == "modified") { 		usort($files, 'sort_date'); usort($directories, 'sort_date'); $rlm = "!";
+} else if (@$sort == "size") { 	usort($files, 'sort_size'); usort($directories, 'sort_size'); $rls = "!";
+} else if (@$sort == "type") { 	usort($files, 'sort_type'); usort($directories, 'sort_type'); $rlt = "!";
 } else { 						usort($files, 'sort_name'); usort($directories, 'sort_name'); $rln = "!";
 }
 
@@ -165,14 +184,23 @@ if ($reverse) {
 			th a { font-weight: normal; color: #ddd!important; }
 		.spc { margin: 0 .2em 0 .2em; }
 	</style>
+	<?php if ($markdown) { ?>
+	<title><?php echo $title; ?></title> 
+	<?php } else { ?>
 	<title>Directory listing: <?php echo $request; ?></title> 
+	<?php } ?>
 </head> 
 <body> 
 	<header>
+		<?php if (!$markdown) { ?>
 		<h1><?php echo $urlLinks; ?></h1>
+		<?php } ?>
 	</header>
 	
 	<section>
+		<?php if ($markdown) { ?>
+		<?php include($handlerdir."markdown.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
+		<?php } else { ?>
 		<?php if (@$details) { ?>
 		<article id="details">
 			<?php echo $details; ?>
@@ -212,6 +240,7 @@ if ($reverse) {
 				?>
 			</table>
 		</article>
+		<?php } ?>
 	</section>
 		
 </body> 
