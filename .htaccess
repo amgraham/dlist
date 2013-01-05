@@ -1,3 +1,5 @@
 #rewrite
 RewriteEngine On
-RewriteRule ^([a-zA_Z0-9-]+)\.md$  index.php?file=$1
+
+# grab markdown files
+RewriteRule (.+)\.md$  handlers/base.php?file=$1&format=md

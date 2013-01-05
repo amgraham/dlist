@@ -8,7 +8,9 @@ Features
 
 dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.
 
-There is a [demo available](http://smarterfish.com/assets/) that showcases the various features and design of dlist. Another [demo is available](http://craft.smarterfish.com/map/) that showcases some of the [helper file](#helper-files) feature.
+There is a [demo available](http://smarterfish.com/assets/) that showcases the various features and design of dlist. Another [demo is available](http://craft.smarterfish.com/map/) that showcases some of the [helper file](#helper-files) features.
+
+There is a soft feature (one might call it a dangling-of-toes-into-a-cold-pool-implementation) of handling [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`) [which could creep](https://github.com/amgraham/dlist/issues/new) into handling other types of files.
 
 Installation
 ----
@@ -29,7 +31,7 @@ If you wanted to have a `.dir-list` file as well, it must be placed in the same 
 	$details = "A small collection of <em>hopefully</em> helpful documents.";
 	?>
 
-I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues) on how to alleviate the initial investment.
+I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
 
 Enhancement
 ----
@@ -62,6 +64,7 @@ The first will take whatever is contained in the the array and remove it from be
 The second will allow you to include some introductory text at the top of the page:
 
 	$details = "A small collection of <em>hopefully</em> helpful documents.";
+
 
 Future
 ----
