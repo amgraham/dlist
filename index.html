@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Dlist by amgraham</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Dlist : A simple way to list files in a web-directory" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Dlist</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Dlist</h1>
-        <p>A simple way to list files in a web-directory</p>
 
-        <p class="view"><a href="https://github.com/amgraham/dlist">View the Project on GitHub <small>amgraham/dlist</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/amgraham/dlist">View on GitHub</a>
 
+          <h1 id="project_title">Dlist</h1>
+          <h2 id="project_tagline">A simple way to list files in a web-directory</h2>
 
-        <ul>
-          <li><a href="https://github.com/amgraham/dlist/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/amgraham/dlist/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/amgraham/dlist">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/amgraham/dlist/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/amgraham/dlist/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>dlist - simple directory listing</h1>
 
 <p>An empty folder presented by <a href="http://apache.org">Apache</a> (and others) is very ugly. <a href="https://github.com/amgraham/dlist">dlist</a> strives to replace the default in a less-ugly, and slightly-more-useful manner. I hope you find it useful.</p>
@@ -36,7 +39,9 @@
 
 <p>dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.</p>
 
-<p>There is a <a href="http://smarterfish.com/assets/">demo available</a> that showcases the various features and design of dlist. Another <a href="http://craft.smarterfish.com/map/">demo is available</a> that showcases some of the <a href="#helper-files">helper file</a> feature.</p>
+<p>There is a <a href="http://smarterfish.com/assets/">demo available</a> that showcases the various features and design of dlist. Another <a href="http://craft.smarterfish.com/map/">demo is available</a> that showcases some of the <a href="#helper-files">helper file</a> features.</p>
+
+<p>There is a <a href="#handler-files">soft feature</a> (one might call it a dangling-of-toes-into-a-cold-pool-implementation) of handling <a href="http://daringfireball.net/projects/markdown/">markdown</a> files (<code>*.md</code>) <a href="https://github.com/amgraham/dlist/issues/new">which could creep</a> into handling other types of files.</p>
 
 <h2>Installation</h2>
 
@@ -58,9 +63,9 @@ $details = "A small collection of &lt;em&gt;hopefully&lt;/em&gt; helpful documen
 ?&gt;
 </code></pre>
 
-<p>I'm very aware that for multiple directories this is a chore, I'm <a href="https://github.com/amgraham/dlist/issues">open to suggestions</a> on how to alleviate the initial investment.</p>
+<p>I'm very aware that for multiple directories this is a chore, I'm <a href="https://github.com/amgraham/dlist/issues/new">open to suggestions</a> on how to alleviate the initial investment.</p>
 
-<h2>Enhancement</h2>
+<h2>Enhancement     {#enhancement}</h2>
 
 <h3>General Prettiness</h3>
 
@@ -78,7 +83,7 @@ $details = "A small collection of &lt;em&gt;hopefully&lt;/em&gt; helpful documen
 
 <p>You can override the default and change <code>$showhidden</code> to <code>true</code> and have dlist make your hidden files available for all the world to see. <strong>This is not recommended.</strong> If you follow the recommendation or not, dlist will not show it's <a href="#helper-files">helper files</a>, you can also add your own files to excluded by use of our <a href="#helper-files">helper file</a> <code>$ignore</code> variable.</p>
 
-<h2>Helper Files</h2>
+<h2>Helper Files    {#helper-files}</h2>
 
 <p>There is one helper file in use: <code>.dir-list</code>, it currently has two options: <code>$ignore</code> &amp; <code>$details</code>.</p>
 
@@ -92,19 +97,98 @@ $details = "A small collection of &lt;em&gt;hopefully&lt;/em&gt; helpful documen
 <pre><code>$details = "A small collection of &lt;em&gt;hopefully&lt;/em&gt; helpful documents.";
 </code></pre>
 
+<h2>Handler Files   {#handler-files}</h2>
+
+<p><a href="https://github.com/amgraham/dlist">dlist</a> stays out of your way when it comes to individual file access, this is by design. You can add some <em>very simple</em> processing to it through the addition of a handler for <a href="http://daringfireball.net/projects/markdown/">markdown</a> files (<code>*.md</code>).</p>
+
+<p>To enable handling of markdown files, you must keep your <code>dir-listing.php</code> file (and related files) off a single directory, not having individual copies spread throughout your web server.</p>
+
+<p>Most people do this anyway; you only have to consolidate things if you don't soft link copies of <code>dir-listing.php</code> off a centrally located file:</p>
+
+<pre><code>ln -s ../assets/php/dir-listing.php ./index.php
+</code></pre>
+
+<p>Create a directory off that main location called <code>handlers</code> and place the three files from this distribution (conveniently located within the <code>handlers</code> folder) within that directory:</p>
+
+<pre><code>.htaccess
+dir-listing.php
+handlers/
+- markdown.php
+- markdown-extra.php
+- markdown-syntax.md
+</code></pre>
+
+<p>Update your top-most <code>.htaccess</code> file with the following data (typically the one from the example above): </p>
+
+<pre><code>RewriteEngine On
+RewriteRule (.+)\.md$  dir-listing.php?action=markdown&amp;file=$1
+</code></pre>
+
+<p>Note that if you keep you files in a sub-directory off your root, it would look like this:</p>
+
+<pre><code>.htaccess
+index.php
+file.md
+pictures.jpg
+other_documents/
+- other-files
+- lots-of-them
+dir-list/
+- dir-listing.php
+- handlers/
+  - markdown.php
+  - markdown-extra.php
+  - markdown-syntax.md
+</code></pre>
+
+<p>Keep in mind, in this example <code>index.php</code> <strong>is not</strong> a copy of <code>dir-listing.php</code>.</p>
+
+<p>Your <code>.htaccess</code> would look like this:</p>
+
+<pre><code>RewriteEngine On
+RewriteRule (.+)\.md$  /dir-list/dir-listing.php?action=markdown&amp;file=$1
+</code></pre>
+
+<p>You will also need to make one minor change to dir-listing.php, but only if it is located in an offshoot (like the example above). You need to tell PHP to traverse up into the same hierarchy as any markdown files that need processing:</p>
+
+<pre><code># dir-listing.php - original
+&lt;?php if ($markdown) { ?&gt;&lt;article&gt;
+&lt;?php include($handlerdir."markdown-extra.php"); 
+echo Markdown(file_get_contents($_GET["file"].".md")); ?&gt;
+&lt;article&gt;
+</code></pre>
+
+<p>Must be changed to:</p>
+
+<pre><code># dir-listing.php - updated for depth
+&lt;?php if ($markdown) { ?&gt;&lt;article&gt;
+&lt;?php include($handlerdir."markdown-extra.php"); 
+echo Markdown(file_get_contents("../".$_GET["file"].".md")); ?&gt;
+&lt;article&gt;
+</code></pre>
+
+<p>Note the addition of <code>../</code> within <code>file_get_contents</code> on the second to last line. Keep in mind if <code>dir-listing.php</code> is in an even deeper directory from your actual content, you should double the depth: <code>../../</code> to compensate, and any additional depth will require another <code>../</code>.</p>
+
 <h2>Future</h2>
 
 <ol>
-<li>Count of items in a folder (not sure about this one; feedback welcome)</li>
+<li>Count of items in a folder (not sure about this one; <a href="https://github.com/amgraham/dlist/issues/new">feedback welcome</a>)</li>
 <li>Modify the helper file to be able to perform simple regex/wildcard matching.</li>
+<li>More handlers for more types of files. Source code? Images? Sound (I doubt it). <a href="https://github.com/amgraham/dlist/issues/new">Requests welcome</a>.</li>
+<li>Easy drop-in stylesheets/themes.</li>
 </ol>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/amgraham">amgraham</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Dlist maintained by <a href="https://github.com/amgraham">amgraham</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
