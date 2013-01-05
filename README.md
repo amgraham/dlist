@@ -52,7 +52,7 @@ By default, dlist will not display hidden files (some call them "dot-files") wit
 
 You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recommendation or not, dlist will not show it's [helper files](#helper-files), you can also add your own files to excluded by use of our [helper file](#helper-files) `$ignore` variable.
 
-Helper Files
+Helper Files 	{#helper-files}
 ----
 
 There is one helper file in use: `.dir-list`, it currently has two options: `$ignore` &amp; `$details`.

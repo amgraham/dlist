@@ -19,7 +19,6 @@ $fontdir = "http://aramaki/assets/fonts/";
 // <code> blocks in HTML are setup for another font, included within the package, and available through http://google.com/webfonts: AnonymousPro
 
 
-
 // remember, only required if you want to handle markdown files specially
 
 // processess markdown with markdown (oddly enough)!
@@ -188,7 +187,7 @@ if ($reverse) {
 			article#details { margin-bottom: 1em; }
 		.help { cursor: help; border-bottom: 1px dashed #ddd; }
 		code { font-family: "AnonymousRegular"; font-size: 80%; }
-		pre {  margin-left: 2em;}
+		pre {  padding: 1em 0em 1em 2em; background: #efefef; -moz-border-radius: 3px; border-radius: 3px;}
 		table.dir-list { width: 100%; }
 			table.dir-list th { color: #ddd; }
 			table.dir-list td { margin: 2px 5px; padding-bottom: .25em; }
@@ -212,7 +211,7 @@ if ($reverse) {
 	
 	<section>
 		<?php if ($markdown) { ?><article>
-		<?php include($handlerdir."markdown.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
+		<?php include($handlerdir."markdown-extra.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
 		<article>
 		<?php } else { ?><?php if (@$details) { ?><article id="details"><?php echo $details; ?></article><?php } ?>
 
