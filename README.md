@@ -69,5 +69,6 @@ The second will allow you to include some introductory text at the top of the pa
 Future
 ----
 
-1. Count of items in a folder (not sure about this one; feedback welcome)
+1. Count of items in a folder (not sure about this one; [feedback welcome](https://github.com/amgraham/dlist/issues/new))
 2. Modify the helper file to be able to perform simple regex/wildcard matching.
+3. More handlers for more types of files. Source code? Images? Sound (I doubt it). [Requests welcome](https://github.com/amgraham/dlist/issues/new).
