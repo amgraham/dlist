@@ -38,7 +38,7 @@ $pretty = true;
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
 */
-// just remember to change dir-listing.php (in the snippet above) to match the top-most copy of this file.
+// just remember to change dir-listing.php (from the snippet above) to match the top-most copy of this file.
 
 
 // would you like to show hidden files? (recommendation: false)
@@ -95,7 +95,7 @@ if (!in_array($sort, $sortable)) { unset($sort); }
 // go over the files create our two arrays for later, one for folders and another for files, and open a file info handle
 $dh = opendir("."); $files = array(); $directories = array(); $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-/* begin processing the current directory */
+// begin processing the current directory 
 
 while (false !== ($file = readdir($dh))) {
 
@@ -141,15 +141,18 @@ while (false !== ($file = readdir($dh))) {
 		}
 	}
 }
+
 // close the fileinfo link & directory
 finfo_close($finfo); closedir($dh);
 
+// begin sorting the files and directories
 if (@$sort == "modified") { 		usort($files, 'sort_date'); usort($directories, 'sort_date'); $rlm = "!";
-} else if (@$sort == "size") { 	usort($files, 'sort_size'); usort($directories, 'sort_size'); $rls = "!";
-} else if (@$sort == "type") { 	usort($files, 'sort_type'); usort($directories, 'sort_type'); $rlt = "!";
-} else { 						usort($files, 'sort_name'); usort($directories, 'sort_name'); $rln = "!";
+} else if (@$sort == "size") { 		usort($files, 'sort_size'); usort($directories, 'sort_size'); $rls = "!";
+} else if (@$sort == "type") { 		usort($files, 'sort_type'); usort($directories, 'sort_type'); $rlt = "!";
+} else { 							usort($files, 'sort_name'); usort($directories, 'sort_name'); $rln = "!";
 }
 
+// taking care of reverse
 if ($reverse) {
 	// reverse the files
 	$files = array_reverse($files);
@@ -166,12 +169,15 @@ if ($reverse) {
 	<meta charset="UTF-8" /> 
 	<style type="text/css">
 		<?php if ($pretty) { ?>@font-face { font-family: 'UniversalisADFStdRegular'; src: url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
-		<?php } ?>html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}
+		@font-face {font-family: 'AnonymousRegular';src: url('<?php echo $fontdir; ?>/Anonymous-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>/Anonymous-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>/Anonymous-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>/Anonymous-webfont.svg') format('svg');	font-weight: normal; font-style: normal;}
+		<?php } ?>html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}table{border-collapse:collapse;border-spacing:0}
 		html { }
 		<?php if ($pretty) { ?>body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
 		<?php } else { ?>body { font-size: 1em; color: #333; line-height: 1.2em;font-family: sans-serif; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
 		<?php } ?>p { line-height:1.3em; }
-		p,hr,h1,table{margin-bottom:.1em;}
+		p,hr,h1,table{margin-top:1em;}
+		h3, h2 { margin-bottom: 0; }
+		h2 + p, h3 + p { margin-top: 0em; }
 		a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
 		a:hover, a:visited:hover, *[onclick]:hover  { border-bottom: 1px solid #83b0fe; color: #2e52a4;}
 		header { margin-bottom: 1em; } 
@@ -180,6 +186,8 @@ if ($reverse) {
 		article { margin-top: .5em; }
 			article#details { margin-bottom: 1em; }
 		.help { cursor: help; border-bottom: 1px dashed #ddd; }
+		code { font-family: "AnonymousRegular"; font-size: 80%; }
+		pre {  margin-left: 2em;}
 		table.dir-list { width: 100%; }
 			table.dir-list th { color: #ddd; }
 			table.dir-list td { margin: 2px 5px; padding-bottom: .25em; }
@@ -197,21 +205,16 @@ if ($reverse) {
 	<?php } ?>
 </head> 
 <body> 
-	<header>
-		<?php if (!$markdown) { ?>
+	<?php if (!$markdown) { ?><header>
 		<h1><?php echo $urlLinks; ?></h1>
-		<?php } ?>
-	</header>
+	</header><?php } ?>
 	
 	<section>
-		<?php if ($markdown) { ?>
+		<?php if ($markdown) { ?><article>
 		<?php include($handlerdir."markdown.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
-		<?php } else { ?>
-		<?php if (@$details) { ?>
-		<article id="details">
-			<?php echo $details; ?>
-		</article>
-		<?php } ?>
+		<article>
+		<?php } else { ?><?php if (@$details) { ?><article id="details"><?php echo $details; ?></article><?php } ?>
+
 		<article>
 			<table class="dir-list">
 				<tr>
@@ -223,31 +226,31 @@ if ($reverse) {
 				<?php 
 				if (count($directories) > 0) {
 					foreach ($directories as $file) {
-						echo "<tr class=\"folder\">";
+						echo "<tr class=\"folder\">\n\t\t\t\t\t";
 						echo "<td class=\"filename\">";
 						if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
-						echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
-						echo "<td>".$file["last-modified"]."</td>";
-						echo "<td>&mdash;</td>";
-						echo "<td>".$file["file-type"]."</td>";
-						echo "</tr>";
+						echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
+						echo "<td>".$file["last-modified"]."</td>\n\t\t\t\t\t";
+						echo "<td>&mdash;</td>\n\t\t\t\t\t";
+						echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
+						echo "</tr>\n\t\t\t\t";
 					}
 				}
 				foreach ($files as $file) {
-					echo "<tr class=\"file\">";
+					echo "<tr class=\"file\">\n\t\t\t\t\t";
 					echo "<td class=\"filename\">";
 					if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
-					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>";
-					echo "<td>".$file["last-modified"]."</td>";
-					echo "<td>".$file["file-size"]."</td>";
-					echo "<td>".$file["file-type"]."</td>";
-					echo "</tr>";
+					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
+					echo "<td>".$file["last-modified"]."</td>\n\t\t\t\t\t";
+					echo "<td>".$file["file-size"]."</td>\n\t\t\t\t\t";
+					echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
+					echo "</tr>\n\t\t\t\t";
 				}
+				echo "\n";
 				?>
 			</table>
 		</article>
-		<?php } ?>
-	</section>
+	<?php } ?></section>
 		
 </body> 
 </html>
