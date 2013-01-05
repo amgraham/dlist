@@ -15,7 +15,7 @@ $imgdir = "http://aramaki/assets/images/iconic/raster/black/";
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
 // make it a web-font and place it in the following directory (or use the included version)
-$fontdir = "http://aramaki/assets/fonts/";
+$fontdir = "http://aramaki/assets/font/";
 // <code> blocks in HTML are setup for another font, included within the package, and available through http://google.com/webfonts: AnonymousPro
 
 

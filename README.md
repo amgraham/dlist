@@ -95,6 +95,11 @@ Note that if you keep you files in a sub-directory off your root, it would look 
 
 	.htaccess
 	index.php
+	file.md
+	pictures.jpg
+	other_documents/
+	- other-files
+	- lots-of-them
 	dir-list/
 	- dir-listing.php
 	- handlers/
@@ -109,6 +114,23 @@ Your `.htaccess` would look like this:
 	RewriteEngine On
 	RewriteRule (.+)\.md$  /dir-list/dir-listing.php?action=markdown&file=$1
 
+You will also need to make one minor change to dir-listing.php, but only if it is located in an offshoot (like the example above). You need to tell PHP to traverse up into the same hierarchy as any markdown files that need processing:
+
+	# dir-listing.php - original
+	<?php if ($markdown) { ?><article>
+	<?php include($handlerdir."markdown-extra.php"); 
+	echo Markdown(file_get_contents($_GET["file"].".md")); ?>
+	<article>
+
+Must be changed to:
+
+	# dir-listing.php - updated for depth
+	<?php if ($markdown) { ?><article>
+	<?php include($handlerdir."markdown-extra.php"); 
+	echo Markdown(file_get_contents("../".$_GET["file"].".md")); ?>
+	<article>
+
+Note the addition of `../` within `file_get_contents` on the second to last line. Keep in mind if `dir-listing.php` is in an even deeper directory from your actual content, you should double the depth: `../../` to compensate, and any additional depth will require another `../`.
 
 Future
 ----
