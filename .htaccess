@@ -2,4 +2,4 @@
 RewriteEngine On
 
 # grab markdown files
-RewriteRule (.+)\.md$  handlers/base.php?file=$1&format=md
+RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
