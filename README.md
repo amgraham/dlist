@@ -10,7 +10,7 @@ dlist's goal is to match the feature set of Apache's default directory list, wit
 
 There is a [demo available](http://smarterfish.com/assets/) that showcases the various features and design of dlist. Another [demo is available](http://craft.smarterfish.com/map/) that showcases some of the [helper file](#helper-files) features.
 
-There is a soft feature (one might call it a dangling-of-toes-into-a-cold-pool-implementation) of handling [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`) [which could creep](https://github.com/amgraham/dlist/issues/new) into handling other types of files.
+There is a [soft feature](#handler-files) (one might call it a dangling-of-toes-into-a-cold-pool-implementation) of handling [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`) [which could creep](https://github.com/amgraham/dlist/issues/new) into handling other types of files.
 
 Installation
 ----
@@ -52,6 +52,7 @@ By default, dlist will not display hidden files (some call them "dot-files") wit
 
 You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recommendation or not, dlist will not show it's [helper files](#helper-files), you can also add your own files to excluded by use of our [helper file](#helper-files) `$ignore` variable.
 
+
 Helper Files 	{#helper-files}
 ----
 
@@ -64,6 +65,49 @@ The first will take whatever is contained in the the array and remove it from be
 The second will allow you to include some introductory text at the top of the page:
 
 	$details = "A small collection of <em>hopefully</em> helpful documents.";
+
+Handler Files 	{#handler-files}
+----
+
+[dlist](https://github.com/amgraham/dlist) stays out of your way when it comes to individual file access, this is by design. You can add some _very simple_ processing to it through the addition of a handler for [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`).
+
+To enable handling of markdown files, you must keep your `dir-listing.php` file (and related files) off a single directory, not having individual copies spread throughout your web server.
+
+Most people do this anyway; you only have to consolidate things if you don't soft link copies of `dir-listing.php` off a centrally located file:
+
+	ln -s ../assets/php/dir-listing.php ./index.php
+
+Create a directory off that main location called `handlers` and place the three files from this distribution (conveniently located within the `handlers` folder) within that directory:
+
+	.htaccess
+	dir-listing.php
+	handlers/
+	- markdown.php
+	- markdown-extra.php
+	- markdown-syntax.md
+
+Update your top-most `.htaccess` file with the following data (typically the one from the example above): 
+
+	RewriteEngine On
+	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
+
+Note that if you keep you files in a sub-directory off your root, it would look like this:
+
+	.htaccess
+	index.php
+	dir-list/
+	- dir-listing.php
+	- handlers/
+	  - markdown.php
+	  - markdown-extra.php
+	  - markdown-syntax.md
+
+Keep in mind, in this example `index.php` **is not** a copy of `dir-listing.php`.
+
+Your `.htaccess` would look like this:
+
+	RewriteEngine On
+	RewriteRule (.+)\.md$  /dir-list/dir-listing.php?action=markdown&file=$1
 
 
 Future
