@@ -78,7 +78,7 @@ The top-most `.htaccess` file you wish to begin handling markdown files for must
 	RewriteEngine On
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-You can keep the file anywhere you wish though (though I tend to believe the first copy is easier):
+You can keep the file anywhere you wish:
 
 	RewriteEngine On
 	RewriteRule (.+)\.md$  /assets/dlist/dir-listing.php?action=markdown&file=$1
