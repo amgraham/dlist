@@ -73,17 +73,17 @@ Handler Files
 
 To enable this feature you must have access to the `handlers/markdown.php` file somewhere on your server, and be able to create your own `.htaccess` files. Depending on your setup these files can be placed in any number of places. The following is an example of _one environment_ and does not denote the only possible combination.
 
-Your top-most `.htaccess` file must `rewrite` requests for `.md` files to a copy of `dlist`:
+The top-most `.htaccess` file you wish to begin handling markdown files for must `rewrite` requests for `.md` files to a copy of `dlist`:
 
 	RewriteEngine On
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-You can keep the file anywhere you wish though:
+You can keep the file anywhere you wish though (though I tend to believe the first copy is easier):
 
 	RewriteEngine On
 	RewriteRule (.+)\.md$  /assets/dlist/dir-listing.php?action=markdown&file=$1
 
-If you maintain an installation closer to the second one, you will need to make one minor edit to `dir-listing.php`.
+If you maintain an installation closer to the second one, you will need to make one minor edit to `dir-listing.php`. Keep in mind the following examples are real code, but they have been formatted (linebreaks have been added):
 
 	# dir-listing.php - original
 	<?php if ($markdown) { ?><article>
