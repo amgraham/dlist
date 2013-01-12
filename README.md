@@ -1,35 +1,28 @@
 dlist - simple directory listing
 ====
 
-An empty folder presented by [Apache](http://apache.org) (and others) is very ugly. [dlist](https://github.com/amgraham/dlist) strives to replace the default in a less-ugly, and slightly-more-useful manner. I hope you find it useful.
+An empty folder presented by [Apache](http://apache.org) (and others) is very ugly, offers little in customization, and can be a chore to work with. [dlist](https://github.com/amgraham/dlist) strives to replace the default in a less-ugly, and slightly-more-useful manner. 
+
+I hope you find it as useful as I have attempted to make it.
 
 Features
 ----
 
-dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.
+dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style, but a little substance), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.
 
-There is a [demo available](http://smarterfish.com/assets/) that showcases the various features and design of dlist. Another [demo is available](http://craft.smarterfish.com/map/) that showcases some of the [helper file](#helper-file) features.
-
-There is a [soft feature](#handler-files) (one might call it a dangling-of-toes-into-a-cold-pool-implementation) of handling [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`) [which could creep](https://github.com/amgraham/dlist/issues/new) into handling other types of files.
+There is a [demo available](http://craft.smarterfish.com/map/) that showcases the various features and design of dlist.
 
 Installation
 ----
 
 You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments](#enhancement) you might need to make, and place it somewhere accessible on your web-host of choice.
 
+## Placement
+
 It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated [helper files](#helper-file) will need to go within the various directories that require them.
 
     cd /var/www/bin/
     ln -s ../assets/dir-listing.php ./index.php
-
-If you wanted to have a `.dir-list` file as well, it must be placed in the same directory.
-
-    #/var/www/bin/.dir-list
-    <?php 
-    $ignore = array("markdown.php", "secret-file.html");
-
-	$details = "<p>A small collection of <em>hopefully</em> helpful documents.</p>";
-	?>
 
 I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
 
@@ -63,7 +56,7 @@ There can be more, this is a simplified installation. Check out the `handlers/RE
 Helper File
 ----
 
-Each direcotry can have a special file with specific information for that directory: `.dir-list`, it has two variables: `$ignore` &amp; `$details`.
+Each directory can have a helper file with specific information for that directory: `.dir-list`. It has two variables: `$ignore` &amp; `$details`, you don't need to set them both.
 
 The first will take whatever is contained in the the array and remove it from being displayed within the rendered page:
 
@@ -71,7 +64,7 @@ The first will take whatever is contained in the the array and remove it from be
 
 The second will allow you to include some introductory text at the top of the page:
 
-	$details = "A small collection of <em>hopefully</em> helpful documents.";
+	$details = "<p>A small collection of <em>hopefully</em> helpful documents.<p>";
 
 Future
 ----
