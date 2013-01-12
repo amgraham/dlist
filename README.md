@@ -66,7 +66,7 @@ The second will allow you to include some introductory text at the top of the pa
 
 	$details = "A small collection of <em>hopefully</em> helpful documents.";
 
-Handler Files 
+Handler Files
 ----
 
 [dlist](https://github.com/amgraham/dlist) stays out of your way when it comes to individual file access, this is by design. You can add some _very simple_ processing to it through the addition of a handler for [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`).
