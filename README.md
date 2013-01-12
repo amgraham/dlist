@@ -28,7 +28,7 @@ If you wanted to have a `.dir-list` file as well, it must be placed in the same 
     <?php 
     $ignore = array("markdown.php", "secret-file.html");
 
-	$details = "A small collection of <em>hopefully</em> helpful documents.";
+	$details = "<p>A small collection of <em>hopefully</em> helpful documents.</p>";
 	?>
 
 I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
@@ -100,11 +100,6 @@ Must be changed to:
 	<article>
 
 Note the addition of `../../` within `file_get_contents()` on the second to last line. For however many folders you declare the depth in `.htaccess` you must increase the depth (`../`) in dir-listing.php
-
-Most people do this anyway; you only have to consolidate things if you don't soft link copies of `dir-listing.php` off a centrally located file:
-
-	ln -s ../assets/php/dir-listing.php ./index.php
-
 
 Future
 ----
