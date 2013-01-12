@@ -58,13 +58,12 @@ We can process markdown-enabled files by placing `handlers/markdown.php` somewhe
 
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-There can be more, this is a simplified installation. Check out the handlers/README.md file for more.
-
+There can be more, this is a simplified installation. Check out the `handlers/README.md` file for more.
 
 Helper File
 ----
 
-There is one helper file in use: `.dir-list`, it currently has two options: `$ignore` &amp; `$details`.
+Each direcotry can have a special file with specific information for that directory: `.dir-list`, it has two variables: `$ignore` &amp; `$details`.
 
 The first will take whatever is contained in the the array and remove it from being displayed within the rendered page:
 
