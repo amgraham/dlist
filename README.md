@@ -33,7 +33,7 @@ If you wanted to have a `.dir-list` file as well, it must be placed in the same 
 
 I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
 
-Enhancement 	{#enhancement}
+Enhancement 
 ----
 
 ### General Prettiness
@@ -53,7 +53,7 @@ By default, dlist will not display hidden files (some call them "dot-files") wit
 You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recommendation or not, dlist will not show it's [helper files](#helper-files), you can also add your own files to excluded by use of our [helper file](#helper-files) `$ignore` variable.
 
 
-Helper Files 	{#helper-files}
+Helper Files 
 ----
 
 There is one helper file in use: `.dir-list`, it currently has two options: `$ignore` &amp; `$details`.
@@ -66,55 +66,24 @@ The second will allow you to include some introductory text at the top of the pa
 
 	$details = "A small collection of <em>hopefully</em> helpful documents.";
 
-Handler Files 	{#handler-files}
+Handler Files 
 ----
 
 [dlist](https://github.com/amgraham/dlist) stays out of your way when it comes to individual file access, this is by design. You can add some _very simple_ processing to it through the addition of a handler for [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`).
 
-To enable handling of markdown files, you must keep your `dir-listing.php` file (and related files) off a single directory, not having individual copies spread throughout your web server.
+To enable this feature you must have access to the `handlers/markdown.php` file somewhere on your server, and be able to create your own `.htaccess` files. Depending on your setup these files can be placed in any number of places. The following is an example of _one environment_ and does not denote the only possible combination.
 
-Most people do this anyway; you only have to consolidate things if you don't soft link copies of `dir-listing.php` off a centrally located file:
-
-	ln -s ../assets/php/dir-listing.php ./index.php
-
-Create a directory off that main location called `handlers` and place the three files from this distribution (conveniently located within the `handlers` folder) within that directory:
-
-	.htaccess
-	dir-listing.php
-	handlers/
-	- markdown.php
-	- markdown-extra.php
-	- markdown-syntax.md
-
-Update your top-most `.htaccess` file with the following data (typically the one from the example above): 
+Your top-most `.htaccess` file must `rewrite` requests for `.md` files to a copy of `dlist`:
 
 	RewriteEngine On
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-Note that if you keep you files in a sub-directory off your root, it would look like this:
-
-	.htaccess
-	index.php
-	file.md
-	pictures.jpg
-	other_documents/
-	- other-files
-	- lots-of-them
-	dir-list/
-	- dir-listing.php
-	- handlers/
-	  - markdown.php
-	  - markdown-extra.php
-	  - markdown-syntax.md
-
-Keep in mind, in this example `index.php` **is not** a copy of `dir-listing.php`.
-
-Your `.htaccess` would look like this:
+You can keep the file anywhere you wish though:
 
 	RewriteEngine On
-	RewriteRule (.+)\.md$  /dir-list/dir-listing.php?action=markdown&file=$1
+	RewriteRule (.+)\.md$  /assets/dlist/dir-listing.php?action=markdown&file=$1
 
-You will also need to make one minor change to dir-listing.php, but only if it is located in an offshoot (like the example above). You need to tell PHP to traverse up into the same hierarchy as any markdown files that need processing:
+If you maintain an installation closer to the second one, you will need to make one minor edit to `dir-listing.php`.
 
 	# dir-listing.php - original
 	<?php if ($markdown) { ?><article>
@@ -127,10 +96,15 @@ Must be changed to:
 	# dir-listing.php - updated for depth
 	<?php if ($markdown) { ?><article>
 	<?php include($handlerdir."markdown-extra.php"); 
-	echo Markdown(file_get_contents("../".$_GET["file"].".md")); ?>
+	echo Markdown(file_get_contents("../../".$_GET["file"].".md")); ?>
 	<article>
 
-Note the addition of `../` within `file_get_contents` on the second to last line. Keep in mind if `dir-listing.php` is in an even deeper directory from your actual content, you should double the depth: `../../` to compensate, and any additional depth will require another `../`.
+Note the addition of `../../` within `file_get_contents()` on the second to last line. For however many folders you declare the depth in `.htaccess` you must increase the depth (`../`) in dir-listing.php
+
+Most people do this anyway; you only have to consolidate things if you don't soft link copies of `dir-listing.php` off a centrally located file:
+
+	ln -s ../assets/php/dir-listing.php ./index.php
+
 
 Future
 ----
