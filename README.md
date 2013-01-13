@@ -17,21 +17,19 @@ Installation
 
 You only **really** need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments](#enhancement) you might need to make, and place it somewhere accessible on your web-host of choice.
 
-### Placement
-
-It is recommended to place it somewhere universally accessible, and then link it into other directories. Keep in mind, any associated [helper files](#helper-file) will need to go within the various directories that require them.
+If you are going to want to utilize dlist multiple times it is recommended to place it somewhere universally accessible, and then link it into other directories. 
 
     cd /var/www/
     ln -s assets/dlist/dir-listing.php ./index.php
 
-I'm very aware that for multiple directories this can be a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
+Keep in mind, any associated [helper files](#helper-file) will need to go within the various directories that require them.
 
 Enhancement 
 ----
 
 ### General Prettiness
 
-It will look prettier if you also utilize four icons and web-font. They are "turned on" by default, but you can turn them off easily by changing `$pretty` to `$false`. If you never update the associated variables, however, you will not see a difference.
+It will look prettier if you also utilize four icons and web-font. They are "turned on" by default, but you can turn them off easily by changing `$pretty` to `$false`.
 
 The four icons are from <http://somerandomdude.com/work/iconic/>, while the font is Universalis from <http://arkandis.tuxfamily.org/adffonts.html> both are included in this release for your convenience. If you happen to use dlist for processing markdown files there is an additional font in use: Anonymous from <http://www.ms-studio.com/FontSales/anonymous.html>, it is also included in this release for your convenience.
 
@@ -41,7 +39,7 @@ A refresh of your browser should display the changes.
 
 ### Hidden Files
 
-By default, dlist will not display hidden files (some call them "dot-files") within the current directory; this is intentional and recommended.
+By default, dlist will not display hidden files (some call them _dot-files_) within each directory; this is intentional and recommended.
 
 You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recommendation or not, dlist will not show it's [helper files](#helper-file), you can also add your own files to excluded by use of our [helper file](#helper-file) `$ignore` variable.
 
@@ -51,12 +49,12 @@ We can process markdown-enabled files by placing `handlers/markdown.php` somewhe
 
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-There can be more, this is a simplified installation. Check out the `handlers/README.md` file for more.
+This is a simplified example, check out `handlers/README.md` file for more details & examples.
 
 Helper File
 ----
 
-Each directory can have a helper file with specific information for that directory: `.dir-list`. It has two variables: `$ignore` &amp; `$details`, you don't need to set them both.
+Each directory can have a helper file with specific information for that directory: `.dir-list`. It can have two variables: `$ignore` &amp; `$details`.
 
 The first will take whatever is contained in the the array and remove it from being displayed within the rendered page:
 
@@ -73,4 +71,4 @@ Future
 2. Modify the helper file to be able to perform simple regex/wildcard matching.
 3. More handlers for more types of files. Source code? Images? Sound? [Requests welcome](https://github.com/amgraham/dlist/issues/new).
 4. Easy drop-in stylesheets/themes.
-5. Add `$pretty` to `.dir-list`.
+5. Add `$pretty` &amp; `$showpretty` to `.dir-list`.
