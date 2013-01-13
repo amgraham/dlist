@@ -15,27 +15,27 @@ There is a [demo available](http://craft.smarterfish.com/map/) that showcases th
 Installation
 ----
 
-You only *really* need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments](#enhancement) you might need to make, and place it somewhere accessible on your web-host of choice.
+You only **really** need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments](#enhancement) you might need to make, and place it somewhere accessible on your web-host of choice.
 
 ### Placement
 
-It is recommended to place it somewhere easy (read; universally accessible), and then link it into other directories. Keep in mind, any associated [helper files](#helper-file) will need to go within the various directories that require them.
+It is recommended to place it somewhere universally accessible, and then link it into other directories. Keep in mind, any associated [helper files](#helper-file) will need to go within the various directories that require them.
 
-    cd /var/www/bin/
-    ln -s ../assets/dir-listing.php ./index.php
+    cd /var/www/
+    ln -s assets/dlist/dir-listing.php ./index.php
 
-I'm very aware that for multiple directories this is a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
+I'm very aware that for multiple directories this can be a chore, I'm [open to suggestions](https://github.com/amgraham/dlist/issues/new) on how to alleviate the initial investment.
 
 Enhancement 
 ----
 
 ### General Prettiness
 
-It will look prettier if you also utilize four icons and a web-font, they are "turned on" by default so you can get up and running immediately.
+It will look prettier if you also utilize four icons and web-font. They are "turned on" by default, but you can turn them off easily by changing `$pretty` to `$false`.
 
-The four icons are from <http://somerandomdude.com/work/iconic/>, while the font is Universalis from <http://arkandis.tuxfamily.org/adffonts.html> both are included in this release for your convenience.
+The four icons are from <http://somerandomdude.com/work/iconic/>, while the font is Universalis from <http://arkandis.tuxfamily.org/adffonts.html> both are included in this release for your convenience. If you happen to use dlist for processing markdown files there is an additional font in use: Anonymous from <http://www.ms-studio.com/FontSales/anonymous.html>, it is also included in this release for your convenience.
 
-You should beautify your installation and upload the four icons and web font somewhere accessible, open `dir-listing.php` in your favorite editor, and update `$imgdir` &amp; `$fontdir` accordingly (wherever you decided to keep the icons and webf ont).
+To beautify your installation and place the icons and font(s) somewhere accessible, open `dir-listing.php` in your favorite editor, and update `$imgdir` &amp; `$fontdir` accordingly.
 
 A refresh of your browser should display the changes.
 
@@ -73,3 +73,4 @@ Future
 2. Modify the helper file to be able to perform simple regex/wildcard matching.
 3. More handlers for more types of files. Source code? Images? Sound? [Requests welcome](https://github.com/amgraham/dlist/issues/new).
 4. Easy drop-in stylesheets/themes.
+5. Add `$pretty` to `.dir-list`.
