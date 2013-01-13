@@ -8,7 +8,7 @@ I hope you find it as useful as I have attempted to make it.
 Features
 ----
 
-dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements (mostly style, but a little substance), in doing so, you can sort the files by the various columns. Clicking them again will reverse the order.
+dlist's goal is to match the feature set of Apache's default directory list, with a few enhancements--mostly style, but a little substance.
 
 There is a [demo available](http://craft.smarterfish.com/map/) that showcases the various features and design of dlist.
 
@@ -31,7 +31,7 @@ Enhancement
 
 ### General Prettiness
 
-It will look prettier if you also utilize four icons and web-font. They are "turned on" by default, but you can turn them off easily by changing `$pretty` to `$false`.
+It will look prettier if you also utilize four icons and web-font. They are "turned on" by default, but you can turn them off easily by changing `$pretty` to `$false`. If you never update the associated variables, however, you will not see a difference.
 
 The four icons are from <http://somerandomdude.com/work/iconic/>, while the font is Universalis from <http://arkandis.tuxfamily.org/adffonts.html> both are included in this release for your convenience. If you happen to use dlist for processing markdown files there is an additional font in use: Anonymous from <http://www.ms-studio.com/FontSales/anonymous.html>, it is also included in this release for your convenience.
 
