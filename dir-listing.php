@@ -169,7 +169,7 @@ if ($reverse) {
 	<meta charset="UTF-8" /> 
 	<style type="text/css">
 		<?php if ($pretty) { ?>@font-face { font-family: 'UniversalisADFStdRegular'; src: url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>universalisadfstd-regular-webfont.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
-		@font-face {font-family: 'AnonymousRegular';src: url('<?php echo $fontdir; ?>/Anonymous-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>/Anonymous-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>/Anonymous-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>/Anonymous-webfont.svg') format('svg');	font-weight: normal; font-style: normal;}
+		@font-face {font-family: 'AnonymousRegular';src: url('<?php echo $fontdir; ?>/Anonymous-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>/Anonymous-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>/Anonymous-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>/Anonymous-webfont.svg') format('svg');	font-weight: normal; font-style: normal;} /* http://www.ms-studio.com/FontSales/anonymous.html */
 		<?php } ?>html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}table{border-collapse:collapse;border-spacing:0}
 		html { }
 		<?php if ($pretty) { ?>body { font-size: 1.2em; color: #333; line-height: 1.4em;font-family: "UniversalisADFStdRegular"; width:50em; margin-left: 2em; text-align: left; margin-top: 1em; margin-bottom: 4em; padding-bottom: 2em;}
@@ -211,7 +211,7 @@ if ($reverse) {
 	
 	<section>
 		<?php if ($markdown) { ?><article>
-		<?php include($handlerdir."markdown-extra.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
+		<?php include($handlerdir."markdown.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
 		<article>
 		<?php } else { ?><?php if (@$details) { ?><article id="details"><?php echo $details; ?></article><?php } ?>
 
