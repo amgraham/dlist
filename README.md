@@ -49,7 +49,7 @@ We can process markdown-enabled files by placing `handlers/markdown.php` somewhe
 
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-This is a simplified example, check out `handlers/README.md` file for more details & examples.
+This is a simplified example, check out <https://github.com/amgraham/dlist/blob/master/handlers/README.md> file for more details & examples.
 
 Helper File
 ----
