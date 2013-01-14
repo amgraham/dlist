@@ -3,10 +3,10 @@ Handler Files
 
 [dlist](https://github.com/amgraham/dlist) stays out of your way when it comes to individual file access, this is by design. You can add some _very simple_ processing to it through the addition of a handler for [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`). 
 
-To enable this feature you must place `markdown.php` file somewhere on your server, and create (or edit) an `.htaccess` file. Next you have to tell `dir-listing.php` where to find markdown.php.
+## Basics
 
-	# dir-listing.php
-	$handlerdir = "/var/www/markdown.php";
+To enable this feature you must place `markdown.php` file somewhere on your server, create (or edit) an `.htaccess` file, and finally tell `dir-listing.php` where to find `markdown.php.`
+
 
 Turning On
 ---
