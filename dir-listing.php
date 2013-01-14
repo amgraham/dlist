@@ -5,7 +5,8 @@
 // enjoy!
 
 // the following two are only required if you set $pretty to true
-// the third only if you want to handle markdown text specially
+// the next two tell dir-listing.php how to look and what to present
+// and the last is where we can find special handling files
 
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
@@ -18,6 +19,13 @@ $imgdir = "http://aramaki/assets/images/iconic/raster/black/";
 $fontdir = "http://aramaki/assets/font/";
 // <code> blocks in HTML are setup for another font, included within the package, and available through http://google.com/webfonts: AnonymousPro
 
+// set this to true if you have setup the four icons and web-font
+// make sure you place the respective files in an accessible location, and updated $imgdir & $fontdir above.
+$pretty = true;
+
+// would you like to show hidden files? (recommendation: false)
+// also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
+$showhidden = false;
 
 // remember, only required if you want to handle markdown files specially
 
@@ -25,27 +33,15 @@ $fontdir = "http://aramaki/assets/font/";
 // http://daringfireball.net/projects/markdown
 // place them in the following directory 
 $handlerdir = "/var/www/dev/dlist/handlers/";
-
-// set this to true if you have setup the four icons and web-font
-// make sure you place the respective files in an accessible location
-$pretty = true;
-
-// there is no setting for turning handlers 'on'
-// if you want to process markdown files specially then add the following lines to your top-most .htaccess file:
-/*
-
-	RewriteEngine On
-	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
-
-*/
-// just remember to change dir-listing.php (from the snippet above) to match the top-most copy of this file.
+// there is no way to turn handlers "on"; you just send requests for markdown files to this file through the use of an .htaccess Rewrite
 
 
-// would you like to show hidden files? (recommendation: false)
-// also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
-$showhidden = false;
+
 
 /* STOP EDITING */ // of course, you're more than welcome to poke around, but any alterations below may lead to issues/problems
+
+
+
 
 $markdown = false; if (@$_GET["action"] == "markdown") { $markdown = true; $title = $_GET["file"].".md"; }
 
