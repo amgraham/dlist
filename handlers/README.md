@@ -1,9 +1,14 @@
 Handler Files
 ====
 
-[dlist](https://github.com/amgraham/dlist) stays out of your way when it comes to individual file access, this is by design. You can add some _very simple_ processing to it through the addition of a handler for [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`).
+[dlist](https://github.com/amgraham/dlist) stays out of your way when it comes to individual file access, this is by design. You can add some _very simple_ processing to it through the addition of a handler for [markdown](http://daringfireball.net/projects/markdown/) files (`*.md`). 
 
-To enable this feature you must have access to the `handlers/markdown.php` file somewhere on your server, and be able to create your own `.htaccess` files. Depending on your setup these files can be placed in any number of places. The following is an example of _one environment_ and does not denote the only possible combination.
+To enable this feature you must place `markdown.php` file somewhere on your server, and create (or edit) an `.htaccess` file. Next you have to tell `dir-listing.php` where to find markdown.php.
+
+	# dir-listing.php
+	$handlerdir = "/var/www/markdown.php";
+
+Depending on your setup these files can be placed in any number of places. The following is an example of _one environment_ and does not denote the only possible combination.
 
 The top-most `.htaccess` file you wish to begin handling markdown files for must `rewrite` requests for `.md` files to a copy of `dlist`:
 
