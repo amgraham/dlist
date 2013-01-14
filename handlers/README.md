@@ -8,7 +8,8 @@ To enable this feature you must place `markdown.php` file somewhere on your serv
 	# dir-listing.php
 	$handlerdir = "/var/www/markdown.php";
 
-Depending on your setup these files can be placed in any number of places. The following is an example of _one environment_ and does not denote the only possible combination.
+Turning On
+---
 
 The top-most `.htaccess` file you wish to begin handling markdown files for must `rewrite` requests for `.md` files to a copy of `dlist`:
 
