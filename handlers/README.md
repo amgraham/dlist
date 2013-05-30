@@ -5,12 +5,17 @@ Handler Files
 
 ## Installation
 
-To enable this feature you must take a copy of `markdown.php` file (from the same directory as this file) and place it somewhere accessible on your server, create (or edit) the top-most `.htaccess` file that will be rewriting `*.md` requests, and change `$handlerdir` in `dir-listing.php` to match your setup (the directory on your server which contains `markdown.php`).
+To enable this feature you must take a copy of `markdown.php` file (from the same directory as this file) and place it somewhere accessible on your server:
 
-.htaccess
----
+	#/var/www/dlist/handlers/
+	markdown.php
 
-The top-most `.htaccess` file you wish to begin handling markdown files for must `rewrite` requests for `.md` files to a copy of `dlist`:
+also change `dir-listing.php` to match the location you just updated:
+
+	#/var/www/dlist/dir-listing.php
+	$handlerdir = "/var/www/dev/dlist/handlers/";
+
+Create (or edit) the top-most `.htaccess` file that will be rewriting `*.md` requests:
 
 	RewriteEngine On
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
@@ -19,6 +24,7 @@ You can keep the file anywhere you wish:
 
 	RewriteEngine On
 	RewriteRule (.+)\.md$  /assets/dlist/dir-listing.php?action=markdown&file=$1
+
 
 If you maintain an installation closer to the second one, you will need to make one minor edit to `dir-listing.php`. Keep in mind the following examples are real code, but they have been formatted (linebreaks have been added):
 
@@ -36,4 +42,4 @@ Must be changed to:
 	echo Markdown(file_get_contents("../../".$_GET["file"].".md")); ?>
 	<article>
 
-Note the addition of `../../` within `file_get_contents()` on the second to last line. For however many folders you declare the depth in `.htaccess` you must increase the depth (`../`) in dir-listing.php
+Note the addition of `../../` within `file_get_contents()` on the second to last line. For however many folders you declare the depth in `.htaccess` you must increase the depth (`../`) in `dir-listing.php`.

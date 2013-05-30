@@ -33,7 +33,7 @@ It will look prettier if you also utilize four icons and web-font. They are "tur
 
 The four icons are from <http://somerandomdude.com/work/iconic/>, while the font is Universalis from <http://arkandis.tuxfamily.org/adffonts.html> both are included in this release for your convenience. If you happen to use dlist for processing markdown files there is an additional font in use: Anonymous from <http://www.ms-studio.com/FontSales/anonymous.html>, it is also included in this release for your convenience.
 
-To beautify your installation and place the icons and font(s) somewhere accessible, open `dir-listing.php` in your favorite editor, and update `$imgdir` &amp; `$fontdir` accordingly.
+To beautify your installation: place the icons and font(s) somewhere web-accessible, open `dir-listing.php` in your favorite editor and update `$imgdir` &amp; `$fontdir` accordingly.
 
 A refresh of your browser should display the changes.
 
@@ -72,3 +72,4 @@ Future
 3. More handlers for more types of files. Source code? Images? Sound? [Requests welcome](https://github.com/amgraham/dlist/issues/new).
 4. Easy drop-in stylesheets/themes.
 5. Add `$pretty` &amp; `$showpretty` to `.dir-list`.
+6. Add a way to "lock down" a directory easily; hide all files, simplify the interface and generate a simple "Not Welcome" message.
