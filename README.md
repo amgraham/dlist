@@ -73,3 +73,5 @@ Future
 4. Easy drop-in stylesheets/themes.
 5. Add `$pretty` &amp; `$showpretty` to `.dir-list`.
 6. Add a way to "lock down" a directory easily; hide all files, simplify the interface and generate a simple "Not Welcome" message.
+7. Offer up a limited RSS feed for a directory.
+8. A way to "go back" to the defaule directory listing if a user prefers it.
