@@ -80,7 +80,7 @@ $sort = $_SERVER["QUERY_STRING"]; if (substr($sort, 0, 1) == "!") { $reverse = t
 
 // via: http://stackoverflow.com/a/5478353
 // merge with the files from '.dir-list'
-$ignore = array_merge(array('.', '..', 'index.php', '.dir-list'), $ignore);
+$ignore = array_merge(array('.', '..', 'index.php', '.dir-list', 'dir-listing.php'), $ignore);
 
 // sortable by these only, nothing else
 $sortable = array('name', 'modified', 'size', 'type', '');
