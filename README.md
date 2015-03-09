@@ -70,8 +70,7 @@ Future
 1. 	Count of items in a folder (not sure about this one; [feedback welcome](https://github.com/amgraham/dlist/issues/new))
 2. 	Modify the helper file to be able to perform simple regex/wildcard matching.
 3. 	More handlers for more types of files. Source code? Images? Sound? [Requests welcome](https://github.com/amgraham/dlist/issues/new).
-5. 	Add `$pretty` &amp; `$showpretty` to `.dir-list`.
-6. 	Add a way to "lock down" a directory easily; hide all files, simplify the interface and generate a simple "Not Welcome" message.
-6. 	Offer up a limited RSS feed for a directory.
-7. 	A way to "go back" to the default directory listing if a user prefers it.
-8. 	Showing an alternate directory of files instead of the currently visited folder.
+4. 	Add a way to "lock down" a directory easily; hide all files, simplify the interface and generate a simple "Not Welcome" message.
+5. 	Offer up a limited RSS feed for a directory.
+6. 	A way to "go back" to the default directory listing if a user prefers it.
+7. 	Showing an alternate directory of files instead of the currently visited folder.
