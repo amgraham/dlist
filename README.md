@@ -75,5 +75,4 @@ Future
 6. 	Add a way to "lock down" a directory easily; hide all files, simplify the interface and generate a simple "Not Welcome" message.
 7. 	Offer up a limited RSS feed for a directory.
 8. 	A way to "go back" to the default directory listing if a user prefers it.
-9. 	Automatically ignoring dir-listing.php.
-10. Showing an alternate direcoty of files instead of the currently visited folder.
+9. 	Showing an alternate directory of files instead of the currently visited folder.
