@@ -33,7 +33,12 @@ $showhidden = false;
 // http://daringfireball.net/projects/markdown
 // place them in the following directory 
 $handlerdir = "/var/www/dev/dlist/handlers/";
-// there is no way to turn handlers "on"; you just send requests for markdown files to this file through the use of an .htaccess Rewrite
+// there is no way to turn handlers "on"; you just send requests for markdown files to this file through the use of an .htaccess 
+
+// do you want to use your own stylesheet instead of the provided one?
+// leaving this field blank will default to using the default one.
+// note: you can also set is per directory in .dir-list
+$stylesheet = "";
 
 
 
@@ -163,6 +168,7 @@ if ($reverse) {
 <html lang="en-US"> 
 <head> 
 	<meta charset="UTF-8" /> 
+	<?php if ($stylesheet == "") { ?>
 	<style type="text/css">
 		<?php if ($pretty) { ?>@font-face { font-family: 'Universalis'; src: url('<?php echo $fontdir; ?>universalis.eot') format('eot'), url('<?php echo $fontdir; ?>universalis.woff') format('woff'), url('<?php echo $fontdir; ?>universalis.ttf') format('truetype'), url('<?php echo $fontdir; ?>universalis.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
 		@font-face {font-family: 'AnonymousRegular';src: url('<?php echo $fontdir; ?>/Anonymous-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>/Anonymous-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>/Anonymous-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>/Anonymous-webfont.svg') format('svg');	font-weight: normal; font-style: normal;} /* http://www.ms-studio.com/FontSales/anonymous.html */
@@ -194,6 +200,9 @@ if ($reverse) {
 			th a { font-weight: normal; color: #ddd!important; }
 		.spc { margin: 0 .2em 0 .2em; }
 	</style>
+	<? } else { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo $stylesheet; ?>">
+	<?php } ?>
 	<?php if ($markdown) { ?>
 	<title><?php echo $title; ?></title> 
 	<?php } else { ?>
