@@ -100,3 +100,4 @@ Future
 4. 	Offer up a limited RSS feed for a directory.
 5. 	A way to "go back" to the default directory listing if a user prefers it.
 6. 	Showing an alternate directory of files instead of the currently visited folder.
+7.	Mobile layout
