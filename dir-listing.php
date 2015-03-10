@@ -11,21 +11,21 @@
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
-$imgdir = "http://aramaki/assets/images/iconic/raster/black/";
+$imgdir = "http://aramaki.shell.lcl/assets/images/iconic/raster/black/";
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
 // make it a web-font and place it in the following directory (or use the included version)
-$fontdir = "http://aramaki/assets/font/";
+$fontdir = "http://aramaki.shell.lcl/assets/font/";
 // <code> blocks in HTML are setup for another font, included within the package, and available through http://google.com/webfonts: AnonymousPro
 
 // set this to true if you have setup the four icons and web-font
 // make sure you place the respective files in an accessible location, and updated $imgdir & $fontdir above.
-$pretty = true;
+$pretty = true; // note: you can also set is per directory in .dir-list
 
 // would you like to show hidden files? (recommendation: false)
 // also keep in mind that no matter what you put here, all "helper files", and "structure" files (".", "..") will not be displayed
-$showhidden = false;
+$showhidden = false; // note: you can also set is per directory in .dir-list
 
 // remember, only required if you want to handle markdown files specially
 
@@ -37,8 +37,7 @@ $handlerdir = "/var/www/dev/dlist/handlers/";
 
 // do you want to use your own stylesheet instead of the provided one?
 // leaving this field blank will default to using the default one.
-// note: you can also set is per directory in .dir-list
-$stylesheet = "";
+$stylesheet = ""; // note: you can also set is per directory in .dir-list
 
 
 
@@ -179,6 +178,7 @@ if ($reverse) {
 		<?php } ?>p { line-height:1.3em; }
 		p,hr,h1,table{margin-top:1em;}
 		h3, h2 { margin-bottom: 0; }
+		h2 a[name], h3 a[name] { border: 0px; color: #333!important; cursor: default; } 
 		h2 + p, h3 + p { margin-top: 0em; }
 		a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
 		a:hover, a:visited:hover, *[onclick]:hover  { border-bottom: 1px solid #83b0fe; color: #2e52a4;}
@@ -210,6 +210,12 @@ if ($reverse) {
 	<?php } ?>
 </head> 
 <body> 
+	<?php if (@$status) { ?>
+	<?php echo $status["message"];
+	header($status["header"]); ?>
+
+	<?php } else { ?>
+
 	<?php if (!$markdown) { ?><header>
 		<h1><?php echo $urlLinks; ?></h1>
 	</header><?php } ?>
@@ -256,6 +262,7 @@ if ($reverse) {
 			</table>
 		</article>
 	<?php } ?></section>
+	<?php } ?>
 		
 </body> 
 </html>
