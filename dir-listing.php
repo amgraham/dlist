@@ -1,4 +1,4 @@
-<?php 
+<?php
 // upload this file (along with the icons and font) somewhere accessible on your web-host
 // link other directories to that file for simplicity:
 	// ln -s ../assets/php/dir-listing.php ./index.php
@@ -31,9 +31,9 @@ $showhidden = false; // note: you can also set is per directory in .dir-list
 
 // processess markdown with markdown (oddly enough)!
 // http://daringfireball.net/projects/markdown
-// place them in the following directory 
+// place them in the following directory
 $handlerdir = "/var/www/dev/dlist/handlers/";
-// there is no way to turn handlers "on"; you just send requests for markdown files to this file through the use of an .htaccess 
+// there is no way to turn handlers "on"; you just send requests for markdown files to this file through the use of an .htaccess
 
 // do you want to use your own stylesheet instead of the provided one?
 // leaving this field blank will default to using the default one.
@@ -43,9 +43,6 @@ $stylesheet = ""; // note: you can also set is per directory in .dir-list
 
 
 /* STOP EDITING */ // of course, you're more than welcome to poke around, but any alterations below may lead to issues/problems
-
-
-
 
 $markdown = false; if (@$_GET["action"] == "markdown") { $markdown = true; $title = $_GET["file"].".md"; }
 
@@ -95,7 +92,7 @@ if (!in_array($sort, $sortable)) { unset($sort); }
 // go over the files create our two arrays for later, one for folders and another for files, and open a file info handle
 $dh = opendir("."); $files = array(); $directories = array(); $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-// begin processing the current directory 
+// begin processing the current directory
 
 while (false !== ($file = readdir($dh))) {
 
@@ -108,14 +105,15 @@ while (false !== ($file = readdir($dh))) {
 	if (!in_array($file, $ignore) and $hiddenFile) { $filetype = finfo_file($finfo, $file);
 
 		// directories are different, and treated as such from folders (below)
-		if ($filetype == "directory") { 
+		if ($filetype == "directory") {
 			// we know what icon to use, these are all folders
 			$directories[] = array(
-				"filename" => 			$file, 
-				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)), 
-				"last-modified-raw" => 	date("c", filemtime($file)), 
-				"file-type" => 			finfo_file($finfo, $file), 
-				"file-size-raw" => 		0, 
+				"filename" => 			$file,
+				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)),
+				"last-modified-raw" => 	date("c", filemtime($file)),
+        "last-modified-small" => 	date("d/j/y h:i a", filemtime($file)),
+				"file-type" => 			finfo_file($finfo, $file),
+				"file-size-raw" => 		0,
 				"icon" => 				$imgdir."folder_stroke_16x16.png");
 
 		// these are files
@@ -131,12 +129,13 @@ while (false !== ($file = readdir($dh))) {
 			} else { $icon = false;}
 
 			$files[] = array(
-				"filename" => 			$file, 
-				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)), 
-				"last-modified-raw" => 	date("c", filemtime($file)), 
-				"file-size" => 			format_bytes(filesize($file)), 
-				"file-size-raw" => 		filesize($file), 
-				"file-type" => 			finfo_file($finfo, $file), 
+				"filename" => 			$file,
+				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)),
+				"last-modified-raw" => 	date("c", filemtime($file)),
+        "last-modified-small" => 	date("d/j/y h:i a", filemtime($file)),
+				"file-size" => 			format_bytes(filesize($file)),
+				"file-size-raw" => 		filesize($file),
+				"file-type" => 			finfo_file($finfo, $file),
 				"icon" => 				$icon);
 		}
 	}
@@ -163,12 +162,13 @@ if ($reverse) {
 }
 
 ?>
-<!DOCTYPE html> 
-<html lang="en-US"> 
-<head> 
-	<meta charset="UTF-8" /> 
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<?php if ($stylesheet == "") { ?>
-	<style type="text/css">
+	<style type="text/css" media="screen, projection">
 		<?php if ($pretty) { ?>@font-face { font-family: 'Universalis'; src: url('<?php echo $fontdir; ?>universalis.eot') format('eot'), url('<?php echo $fontdir; ?>universalis.woff') format('woff'), url('<?php echo $fontdir; ?>universalis.ttf') format('truetype'), url('<?php echo $fontdir; ?>universalis.svg') format('svg');  font-weight: normal; font-style: normal; }/* http://arkandis.tuxfamily.org/adffonts.html */
 		@font-face {font-family: 'AnonymousRegular';src: url('<?php echo $fontdir; ?>/Anonymous-webfont.eot') format('eot'), url('<?php echo $fontdir; ?>/Anonymous-webfont.woff') format('woff'), url('<?php echo $fontdir; ?>/Anonymous-webfont.ttf') format('truetype'), url('<?php echo $fontdir; ?>/Anonymous-webfont.svg') format('svg');	font-weight: normal; font-style: normal;} /* http://www.ms-studio.com/FontSales/anonymous.html */
 		<?php } ?>html,body,div,span,h1,p,a,em,font,img,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}table{border-collapse:collapse;border-spacing:0}
@@ -178,18 +178,18 @@ if ($reverse) {
 		<?php } ?>p { line-height:1.3em; }
 		p,hr,h1,table{margin-top:1em;}
 		h3, h2 { margin-bottom: 0; }
-		h2 a[name], h3 a[name] { border: 0px; color: #333!important; cursor: default; } 
+		h2 a[name], h3 a[name] { border: 0px; color: #333!important; cursor: default; }
 		h2 + p, h3 + p { margin-top: 0em; }
 		a, a:visited, *[onclick]{ color: #333; text-decoration: none; border-bottom: 1px solid #ccc; cursor: pointer;}
 		a:hover, a:visited:hover, *[onclick]:hover  { border-bottom: 1px solid #83b0fe; color: #2e52a4;}
-		header { margin-bottom: 1em; } 
+		header { margin-bottom: 1em; }
 			header h1 {font-size:1.7em; margin: 0; padding: 0; display: inline-block;}
 		section { padding: 0; margin: 0; }
 		article { margin-top: .5em; }
 			article#details { margin-bottom: 1em; }
 		.help { cursor: help; border-bottom: 1px dashed #ddd; }
-		code { font-family: "AnonymousRegular", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace; font-size: 80%; }
-		pre {  padding: 1em 0em 1em 2em; background: #efefef; -moz-border-radius: 3px; border-radius: 3px;}
+		code { font-family: "AnonymousRegular", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace; font-size: 80%;}
+		pre {  padding: 1em 0em 1em 2em; background: #efefef; -moz-border-radius: 3px; border-radius: 3px; }
 		table.dir-list { width: 100%; }
 			table.dir-list th { color: #ddd; }
 			table.dir-list td { margin: 2px 5px; padding-bottom: .25em; }
@@ -198,18 +198,29 @@ if ($reverse) {
 			table.dir-list img { vertical-align:-1px; }
 			tr.folder + tr.file td { padding-top: .5em; }
 			th a { font-weight: normal; color: #ddd!important; }
+		ul.dir-list { width: 50em; margin: 0; padding: 0; }
+			ul.dir-list li { display: inline; }
+			ul.dir-list a { border: 0; margin: .2em;}
 		.spc { margin: 0 .2em 0 .2em; }
+    .last-modified-small { display: none; }
+    @media (max-width: 1000px) { body { width: 39em; } pre { overflow: auto;} }
+    @media (max-width: 800px) { body { width:29em; } }
+    @media (max-width: 650px) { body { width:20em; } }
+    @media (max-width: 450px) {<?php if ($pretty) { ?>body { font-size: .8em; line-height: 1em; margin-left: .5em; margin-top: .8em; } <?php } else { ?>body { font-size: .7em; line-height: .9em; margin-left: .5em; margin-top: .8em; } <?php } ?> table.dir-list img { vertical-align:-3px; } article#details { margin-bottom: .4em; } .last-modified-small { display: inline; } .last-modified { display: none; } body { width:24em; } pre { margin-right: .5em} }
+    @media (max-width: 320px) { body { width:22em; } }
+    @media (max-width: 300px) { body { width:18em; } }
+    @media (max-width: 240px) { body { width:15em; } }
 	</style>
 	<? } else { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo $stylesheet; ?>">
 	<?php } ?>
 	<?php if ($markdown) { ?>
-	<title><?php echo $title; ?></title> 
+	<title><?php echo $title; ?></title>
 	<?php } else { ?>
-	<title>Directory listing: <?php echo $request; ?></title> 
+	<title>Directory listing: <?php echo $request; ?></title>
 	<?php } ?>
-</head> 
-<body> 
+</head>
+<body>
 	<?php if (@$status) { ?>
 	<?php echo $status["message"];
 	header($status["header"]); ?>
@@ -219,14 +230,46 @@ if ($reverse) {
 	<?php if (!$markdown) { ?><header>
 		<h1><?php echo $urlLinks; ?></h1>
 	</header><?php } ?>
-	
+
 	<section>
-		<?php if ($markdown) { ?><article>
+		<?php if ($markdown) { ?><article id="document">
 		<?php include($handlerdir."markdown.php"); echo Markdown(file_get_contents($_GET["file"].".md")); ?>
 		<article>
 		<?php } else { ?><?php if (@$details) { ?><article id="details"><?php echo $details; ?></article><?php } ?>
 
 		<article>
+			<?php if (@$gallery == true) { usort($files, 'sort_name'); ?>
+			<?php if (count($directories) > 0) { ?>
+			<table class="dir-list">
+			<tr>
+				<th><a href="?<?php echo $rln; ?>name">filename</a></th>
+				<th><a href="?<?php echo $rlm; ?>modified">last modified</a></th>
+				<th><a href="?<?php echo $rls; ?>size" class="help" title="approximate">size</a></th>
+				<th><a href="?<?php echo $rlt; ?>type">filetype</a></th>
+			</tr>
+			<?php
+				foreach ($directories as $file) {
+					echo "<tr class=\"folder\">\n\t\t\t\t\t";
+					echo "<td class=\"filename\">";
+					if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
+					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
+					echo "<td><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
+					echo "<td>&mdash;</td>\n\t\t\t\t\t";
+					echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
+					echo "</tr>\n\t\t\t\t";
+				} ?>
+			</table>
+			<?php } ?>
+			<ul class="dir-list">
+				<?php
+				foreach ($files as $file) {
+					echo "<li>";
+					echo "<a href=\"".$file["filename"]."\"><img src=\".".$file["filename"]."\" /></a>";
+					echo "</li>";
+				} ?>
+			</ul>
+
+			<? } else { ?>
 			<table class="dir-list">
 				<tr>
 					<th><a href="?<?php echo $rln; ?>name">filename</a></th>
@@ -234,14 +277,14 @@ if ($reverse) {
 					<th><a href="?<?php echo $rls; ?>size" class="help" title="approximate">size</a></th>
 					<th><a href="?<?php echo $rlt; ?>type">filetype</a></th>
 				</tr>
-				<?php 
+				<?php
 				if (count($directories) > 0) {
 					foreach ($directories as $file) {
 						echo "<tr class=\"folder\">\n\t\t\t\t\t";
 						echo "<td class=\"filename\">";
 						if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
 						echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
-						echo "<td>".$file["last-modified"]."</td>\n\t\t\t\t\t";
+            echo "<td><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
 						echo "<td>&mdash;</td>\n\t\t\t\t\t";
 						echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
 						echo "</tr>\n\t\t\t\t";
@@ -252,7 +295,7 @@ if ($reverse) {
 					echo "<td class=\"filename\">";
 					if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
 					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
-					echo "<td>".$file["last-modified"]."</td>\n\t\t\t\t\t";
+          echo "<td><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
 					echo "<td>".$file["file-size"]."</td>\n\t\t\t\t\t";
 					echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
 					echo "</tr>\n\t\t\t\t";
@@ -260,9 +303,10 @@ if ($reverse) {
 				echo "\n";
 				?>
 			</table>
+			<?php } ?>
 		</article>
 	<?php } ?></section>
 	<?php } ?>
-		
-</body> 
+
+</body>
 </html>
