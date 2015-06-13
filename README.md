@@ -1,7 +1,7 @@
 dlist - simple directory listing
 ====
 
-An empty folder presented by [Apache](http://apache.org) (and others) is very ugly, offers little in customization, and can be a chore to work with. [dlist](https://github.com/amgraham/dlist) strives to replace the default in a less-ugly, and slightly-more-useful manner. 
+An empty folder presented by [Apache](http://apache.org) (and others) is very ugly, offers little in customization, and can be a chore to work with. [dlist](https://github.com/amgraham/dlist) strives to replace the default in a less-ugly, and slightly-more-useful manner.
 
 I hope you find it as useful as I have attempted to make it.
 
@@ -17,7 +17,7 @@ Installation
 
 You only **really** need `dir-listing.php`, [grab the file](https://raw.github.com/amgraham/dlist/master/dir-listing.php), make any [adjustments](#enhancement) you might need to make, and place it somewhere accessible on your web-host of choice.
 
-If you are going to want to utilize dlist multiple times it is recommended to place it somewhere universally accessible, and then link it into other directories. 
+If you are going to want to utilize dlist multiple times it is recommended to place it somewhere universally accessible, and then link it into other directories.
 
     cd /var/www/
     ln -s assets/dlist/dir-listing.php ./index.php
@@ -43,7 +43,7 @@ A refresh of your browser should display the changes.
 
 By default, dlist will not display hidden files (some call them _dot-files_) within each directory; this is intentional and recommended.
 
-You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recommendation or not, dlist will not show it's [helper files](#helper-file) or <span class="help" title="Specifically: index.php and dir-listing.php">itself</span>. 
+You can override the default and change `$showhidden` to `true` and have dlist make your hidden files available for all the world to see. **This is not recommended.** If you follow the recommendation or not, dlist will not show it's [helper files](#helper-file) or <span class="help" title="Specifically: index.php and dir-listing.php">itself</span>.
 
 You can also add your own files to be excluded by use of our [helper file](#helper-file) `$ignore` variable.
 
@@ -61,7 +61,7 @@ Each directory can have a helper file with specific information for that directo
 The first will take whatever is contained in the the array and remove it from being displayed within the rendered page:
 
 	$ignore = array(
-		"markdown.php", 
+		"markdown.php",
 		"secret-file.html"
 	);
 
@@ -72,7 +72,7 @@ The second will allow you to include some introductory text at the top of the pa
 The last can help you lockdown a directory as needed and not list any files or resources, just presenting an _optional_ message and response header:
 
 	$status = array(
-		"message" => "<p>You are not welcome, please leave</p>", 
+		"message" => "<p>You are not welcome, please leave</p>",
 		"header" => "HTTP/1.1 403 Forbidden"
 	);
 
@@ -89,7 +89,7 @@ We can process markdown-enabled files by placing `handlers/markdown.php` somewhe
 
 	RewriteRule (.+)\.md$  dir-listing.php?action=markdown&file=$1
 
-This is a simplified example, check out <https://github.com/amgraham/dlist/blob/master/handlers/README.md> file for more details & examples.
+This is a simplified example, check out [README.md](https://github.com/amgraham/dlist/blob/master/handlers/README.md) file for more details & examples.
 
 Future
 ----
