@@ -132,7 +132,7 @@ while (false !== ($file = readdir($dh))) {
 				"filename" => 			$file,
 				"last-modified" => 		date("D j M Y h:i A T", filemtime($file)),
 				"last-modified-raw" => 	date("c", filemtime($file)),
-        "last-modified-small" => 	date("d/j/y h:i a", filemtime($file)),
+        "last-modified-small" => 	date("d/m/y h:i a", filemtime($file)),
 				"file-size" => 			format_bytes(filesize($file)),
 				"file-size-raw" => 		filesize($file),
 				"file-type" => 			finfo_file($finfo, $file),
@@ -203,13 +203,11 @@ if ($reverse) {
 			ul.dir-list a { border: 0; margin: .2em;}
 		.spc { margin: 0 .2em 0 .2em; }
     .last-modified-small { display: none; }
-    @media (max-width: 1000px) { body { width: 39em; } pre { overflow: auto;} }
-    @media (max-width: 800px) { body { width:29em; } }
-    @media (max-width: 650px) { body { width:20em; } }
-    @media (max-width: 450px) {<?php if ($pretty) { ?>body { font-size: .8em; line-height: 1em; margin-left: .5em; margin-top: .8em; } <?php } else { ?>body { font-size: .7em; line-height: .9em; margin-left: .5em; margin-top: .8em; } <?php } ?> table.dir-list img { vertical-align:-3px; } article#details { margin-bottom: .4em; } .last-modified-small { display: inline; } .last-modified { display: none; } body { width:24em; } pre { margin-right: .5em} }
-    @media (max-width: 320px) { body { width:22em; } }
-    @media (max-width: 300px) { body { width:18em; } }
-    @media (max-width: 240px) { body { width:15em; } }
+    @media (max-width: 1000px) { body { width: 95%; font-size: 90%; } pre { overflow: auto;} .last-modified-small { display: inline; } .last-modified, td.small-hide, th.small-hide { display: none; } }
+    @media (max-width: 800px) { body { font-size: 80%; } .small-hide { font-size: 90%; } }
+    @media (max-width: 650px) { body { font-size: 70%; } .small-hide { font-size: 90%; } }
+    @media (max-width: 450px) { body { font-size: 55%; } .small-hide { font-size: 80%; } }
+    @media (max-width: 320px) { body { font-size: 50%; } .small-hide { font-size: 80%; } }
 	</style>
 	<? } else { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo $stylesheet; ?>">
@@ -245,7 +243,7 @@ if ($reverse) {
 				<th><a href="?<?php echo $rln; ?>name">filename</a></th>
 				<th><a href="?<?php echo $rlm; ?>modified">last modified</a></th>
 				<th><a href="?<?php echo $rls; ?>size" class="help" title="approximate">size</a></th>
-				<th><a href="?<?php echo $rlt; ?>type">filetype</a></th>
+				<th class="small-hide"><a href="?<?php echo $rlt; ?>type">filetype</a></th>
 			</tr>
 			<?php
 				foreach ($directories as $file) {
@@ -253,9 +251,9 @@ if ($reverse) {
 					echo "<td class=\"filename\">";
 					if ($pretty) { echo "<img src=\"".$file["icon"]."\"/> "; }
 					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
-					echo "<td><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
+					echo "<td class=\"small-hide\"><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
 					echo "<td>&mdash;</td>\n\t\t\t\t\t";
-					echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
+					echo "<td class=\"small-hide\">".$file["file-type"]."</td>\n\t\t\t\t";
 					echo "</tr>\n\t\t\t\t";
 				} ?>
 			</table>
@@ -275,7 +273,7 @@ if ($reverse) {
 					<th><a href="?<?php echo $rln; ?>name">filename</a></th>
 					<th><a href="?<?php echo $rlm; ?>modified">last modified</a></th>
 					<th><a href="?<?php echo $rls; ?>size" class="help" title="approximate">size</a></th>
-					<th><a href="?<?php echo $rlt; ?>type">filetype</a></th>
+					<th class="small-hide"><a href="?<?php echo $rlt; ?>type">filetype</a></th>
 				</tr>
 				<?php
 				if (count($directories) > 0) {
@@ -286,7 +284,7 @@ if ($reverse) {
 						echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
             echo "<td><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
 						echo "<td>&mdash;</td>\n\t\t\t\t\t";
-						echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
+						echo "<td class=\"small-hide\">".$file["file-type"]."</td>\n\t\t\t\t";
 						echo "</tr>\n\t\t\t\t";
 					}
 				}
@@ -297,7 +295,7 @@ if ($reverse) {
 					echo "<a href=\"".$file["filename"]."\">".$file["filename"]."</a></td>\n\t\t\t\t\t";
           echo "<td><span class=\"last-modified\">".$file["last-modified"]."</span><span class=\"last-modified-small\">".$file["last-modified-small"]."</span></td>\n\t\t\t\t\t";
 					echo "<td>".$file["file-size"]."</td>\n\t\t\t\t\t";
-					echo "<td>".$file["file-type"]."</td>\n\t\t\t\t";
+					echo "<td class=\"small-hide\">".$file["file-type"]."</td>\n\t\t\t\t";
 					echo "</tr>\n\t\t\t\t";
 				}
 				echo "\n";
