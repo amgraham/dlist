@@ -11,12 +11,13 @@
 // looks better with iconic pack!
 // http://somerandomdude.com/work/iconic/
 // place them in the following directory
-$imgdir = "http://aramaki.shell.lcl/assets/images/iconic/raster/black/";
+$imgdir = "http://borma.lan.smarterfish.com/dev/dlist/img/";
+
 
 // looks better with Universalis!
 // http://arkandis.tuxfamily.org/adffonts.html
 // make it a web-font and place it in the following directory (or use the included version)
-$fontdir = "http://aramaki.shell.lcl/assets/font/";
+$fontdir = "http://borma.lan.smarterfish.com/dev/dlist/font/";
 // <code> blocks in HTML are setup for another font, included within the package, and available through http://google.com/webfonts: AnonymousPro
 
 // set this to true if you have setup the four icons and web-font
@@ -32,7 +33,7 @@ $showhidden = false; // note: you can also set is per directory in .dir-list
 // processess markdown with markdown (oddly enough)!
 // http://daringfireball.net/projects/markdown
 // place them in the following directory
-$handlerdir = "/var/www/dev/dlist/handlers/";
+$handlerdir = "/var/www/html/dev/dlist/handlers/";
 // there is no way to turn handlers "on"; you just send requests for markdown files to this file through the use of an .htaccess
 
 // do you want to use your own stylesheet instead of the provided one?
@@ -69,7 +70,7 @@ $rlm = ""; $rln = ""; $rlt = ""; $rls = "";
 
 // build the links for navigation
 $request = $_SERVER["REQUEST_URI"];
-$splitRequest = split("/", $request);
+$splitRequest = explode("/", $request);
 $urlLinks = "<a href=\"http://".$_SERVER["HTTP_HOST"]."\">".$_SERVER["HTTP_HOST"]."</a><span class=\"spc\"/>/</span>";
 // the first and last are empty
 array_shift($splitRequest); array_pop($splitRequest);
