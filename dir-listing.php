@@ -268,7 +268,7 @@ if ($reverse) {
 				} ?>
 			</ul>
 
-			<? } else { ?>
+			<?php } else { ?>
 			<table class="dir-list">
 				<tr>
 					<th><a href="?<?php echo $rln; ?>name">filename</a></th>
